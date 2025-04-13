@@ -5,7 +5,7 @@
 	let mySpace = $state<PortalSpace>();
 </script>
 
-<h1>svelte-teleport</h1>
+<h1>svelte-snippet-portal</h1>
 
 <div class="my-space">
 	<Space bind:this={mySpace} />
