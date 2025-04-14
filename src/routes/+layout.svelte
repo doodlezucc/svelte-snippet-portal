@@ -6,6 +6,7 @@
 
 	import PortalOverlay from '$lib/components/PortalOverlay.svelte';
 	import Header from '$lib/docs/Header.svelte';
+	import Sidebar from '$lib/docs/Sidebar.svelte';
 	import type { Snippet } from 'svelte';
 
 	interface Props {
@@ -18,5 +19,25 @@
 <PortalOverlay>
 	<Header />
 
-	{@render children()}
+	<main>
+		<Sidebar />
+
+		<div class="content">
+			{@render children()}
+		</div>
+	</main>
 </PortalOverlay>
+
+<style lang="scss">
+	main {
+		flex: 1;
+		position: relative;
+		overflow: hidden;
+		display: flex;
+	}
+
+	.content {
+		overflow: auto;
+		margin-top: 2em;
+	}
+</style>

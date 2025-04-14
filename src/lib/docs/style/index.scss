@@ -1,3 +1,4 @@
+@use './constants.scss';
 @use './scheme.scss';
 
 $font-header: 'Merriweather', serif;
@@ -6,13 +7,22 @@ $font-monospace: 'Roboto Mono Variable', monospace;
 
 :root {
 	@include scheme.define-scheme();
+	@include constants.define-constants();
 
 	font-family: $font-body;
 	font-size: 18px;
 }
 
+:root,
 body {
 	margin: 0;
+	height: 100vh;
+}
+
+body > div {
+	display: flex;
+	flex-direction: column;
+	height: 100vh;
 }
 
 h1,
@@ -24,15 +34,19 @@ h3 {
 
 a {
 	color: scheme.color('primary');
+	text-decoration: none;
+
+	&:hover {
+		text-decoration: underline;
+	}
 }
 
 pre,
 code {
 	font-family: $font-monospace;
-}
+	font-weight: normal;
 
-code {
-	background-color: #b7c4ff;
+	background-color: scheme.color('secondary');
 	color: black;
 	padding: 2px 4px;
 	border-radius: 8px;

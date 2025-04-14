@@ -12,8 +12,11 @@
 	{@render children()}
 </div>
 
-<style>
+<style lang="scss">
+	@use '$lib/docs/style/constants.scss';
+
 	div {
-		padding: 0 max(40px, calc(50vw - 480px));
+		margin: 0 6em;
+		padding: 0 constants.$sidebar-width;
 	}
 </style>

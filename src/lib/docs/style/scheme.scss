@@ -11,15 +11,19 @@
 }
 
 @mixin define-scheme() {
-	@include define-color('primary', #2e54ff);
-	@include define-color('secondary', #ff361b);
+	@include define-color('primary', #e6431a);
+	@include define-color('secondary', #dcecff);
+
+	@include define-color('shade-1', #f7f7f7);
+	@include define-color('shade-2', #dbdbdb);
 
 	@include define-color('background', #ffffff);
-	@include define-color('text', #0a0a0a);
+	@include define-color('text', #161616);
 	@include define-color('text-light', #ffffff);
 
-	@include define-color('separator', #dddddd);
+	@include define-color('separator', color('shade-2'));
 
 	background-color: color('background');
 	color: color('text');
+	font-weight: 500;
 }

@@ -1,6 +1,5 @@
 <header>
 	<a href="/">Svelte Snippet Portal</a>
-	<a href="/examples">Examples</a>
 </header>
 
 <style lang="scss">
@@ -14,5 +13,9 @@
 
 		background-color: scheme.color('background');
 		border-bottom: 1px solid scheme.color('separator');
+	}
+
+	a {
+		color: scheme.color('text');
 	}
 </style>
