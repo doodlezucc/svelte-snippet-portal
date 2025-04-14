@@ -1,0 +1,39 @@
+@use './scheme.scss';
+
+$font-header: 'Merriweather', serif;
+$font-body: 'Montserrat Variable', sans-serif;
+$font-monospace: 'Roboto Mono Variable', monospace;
+
+:root {
+	@include scheme.define-scheme();
+
+	font-family: $font-body;
+	font-size: 18px;
+}
+
+body {
+	margin: 0;
+}
+
+h1,
+h2,
+h3 {
+	font-family: $font-header;
+	font-weight: bold;
+}
+
+a {
+	color: scheme.color('primary');
+}
+
+pre,
+code {
+	font-family: $font-monospace;
+}
+
+code {
+	background-color: #b7c4ff;
+	color: black;
+	padding: 2px 4px;
+	border-radius: 8px;
+}

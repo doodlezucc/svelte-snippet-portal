@@ -1,0 +1,25 @@
+@function var-name-color($color-name) {
+	@return --color-#{$color-name};
+}
+
+@function color($color-name) {
+	@return var(var-name-color($color-name));
+}
+
+@mixin define-color($color-name, $value) {
+	#{var-name-color($color-name)}: $value;
+}
+
+@mixin define-scheme() {
+	@include define-color('primary', #2e54ff);
+	@include define-color('secondary', #ff361b);
+
+	@include define-color('background', #ffffff);
+	@include define-color('text', #0a0a0a);
+	@include define-color('text-light', #ffffff);
+
+	@include define-color('separator', #dddddd);
+
+	background-color: color('background');
+	color: color('text');
+}

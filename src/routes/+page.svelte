@@ -1,41 +1,46 @@
 <script lang="ts">
-	import { Anchor, Portal, Space, type PortalSpace } from '$lib/index.js';
-	import SampleText from './SampleText.svelte';
-
-	let mySpace = $state<PortalSpace>();
+	import Content from '$lib/docs/Content.svelte';
+	import SampleText from '$lib/docs/SampleText.svelte';
+	import { Anchor } from '$lib/index.js';
 </script>
 
-<h1>svelte-snippet-portal</h1>
+<Content>
+	<h1>Svelte Snippet Portal</h1>
 
-<div class="my-space">
-	<Space bind:this={mySpace} />
-</div>
+	<p>
+		Svelte components to teleport snippets from one place to another. Useful for popovers and modal
+		elements.
+	</p>
 
-{#if mySpace}
-	<Portal space={mySpace}>
-		<SampleText />
-	</Portal>
-{/if}
+	<h2>{'<Anchor>'}</h2>
 
-<div class="grid">
-	<Anchor origin="center-left">
-		<div>div content</div>
+	<p>
+		Anchors are wrapped around an element and provide a way to mount custom content
+		<i>in relation</i> to the wrapped element.
+	</p>
 
-		{#snippet portal()}
-			portal content
-		{/snippet}
-	</Anchor>
+	<div class="grid">
+		<Anchor origin="top-center">
+			<div>div content</div>
 
-	<Anchor origin="bottom-center">
-		<textarea>div content</textarea>
+			{#snippet portal()}
+				portal content
+			{/snippet}
+		</Anchor>
 
-		{#snippet portal()}
-			<div class="popover"><SampleText /></div>
-		{/snippet}
-	</Anchor>
-</div>
+		<Anchor origin="bottom-left" alignment="top-center">
+			<textarea></textarea>
 
-<style>
+			{#snippet portal()}
+				<div class="popover"><SampleText /></div>
+			{/snippet}
+		</Anchor>
+	</div>
+</Content>
+
+<style lang="scss">
+	@use '$lib/docs/style/scheme';
+
 	.grid {
 		border: 1px solid black;
 		display: grid;
@@ -46,13 +51,15 @@
 	.grid div {
 		padding: 20px;
 		width: 200px;
-		background-color: burlywood;
+		background-color: scheme.color('primary');
+		color: scheme.color('text-light');
 	}
 
 	.popover {
-		background-color: aqua;
+		background-color: scheme.color('primary');
+		color: scheme.color('text-light');
 		padding: 8px;
 		border: 1px solid black;
-		margin: 8px;
+		margin: 2px;
 	}
 </style>
