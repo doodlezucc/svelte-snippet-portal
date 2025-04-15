@@ -5,6 +5,7 @@
 	import '@fontsource/merriweather';
 
 	import PortalOverlay from '$lib/components/PortalOverlay.svelte';
+	import Content from '$lib/docs/Content.svelte';
 	import Header from '$lib/docs/Header.svelte';
 	import Sidebar from '$lib/docs/Sidebar.svelte';
 	import type { Snippet } from 'svelte';
@@ -22,9 +23,9 @@
 	<main>
 		<Sidebar />
 
-		<div class="content">
+		<Content>
 			{@render children()}
-		</div>
+		</Content>
 	</main>
 </PortalOverlay>
 
@@ -34,10 +35,5 @@
 		position: relative;
 		overflow: hidden;
 		display: flex;
-	}
-
-	.content {
-		overflow: auto;
-		margin-top: 2em;
 	}
 </style>

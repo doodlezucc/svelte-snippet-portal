@@ -1,42 +1,39 @@
 <script lang="ts">
-	import Content from '$lib/docs/Content.svelte';
 	import SampleText from '$lib/docs/SampleText.svelte';
 	import { Anchor } from '$lib/index.js';
 </script>
 
-<Content>
-	<h1>Svelte Snippet Portal</h1>
+<h1>Svelte Snippet Portal</h1>
 
-	<p>
-		Svelte components to teleport snippets from one place to another. Useful for popovers and modal
-		elements.
-	</p>
+<p>
+	Svelte components to teleport snippets from one place to another. Useful for popovers and modal
+	elements.
+</p>
 
-	<h2>{'<Anchor>'}</h2>
+<h2>{'<Anchor>'}</h2>
 
-	<p>
-		Anchors are wrapped around an element and provide a way to mount custom content
-		<i>in relation</i> to the wrapped element.
-	</p>
+<p>
+	Anchors are wrapped around an element and provide a way to mount custom content
+	<i>in relation</i> to the wrapped element.
+</p>
 
-	<div class="grid">
-		<Anchor origin="top-center">
-			<div>div content</div>
+<div class="grid">
+	<Anchor origin="top-center">
+		<div>div content</div>
 
-			{#snippet portal()}
-				portal content
-			{/snippet}
-		</Anchor>
+		{#snippet portal()}
+			portal content
+		{/snippet}
+	</Anchor>
 
-		<Anchor origin="bottom-left" alignment="top-center">
-			<textarea></textarea>
+	<Anchor origin="bottom-left" alignment="top-center">
+		<textarea></textarea>
 
-			{#snippet portal()}
-				<div class="popover"><SampleText /></div>
-			{/snippet}
-		</Anchor>
-	</div>
-</Content>
+		{#snippet portal()}
+			<div class="popover"><SampleText /></div>
+		{/snippet}
+	</Anchor>
+</div>
 
 <style lang="scss">
 	@use '$lib/docs/style/scheme';

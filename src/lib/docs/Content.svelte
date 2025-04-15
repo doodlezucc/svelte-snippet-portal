@@ -17,6 +17,8 @@
 
 	div {
 		margin: 0 6em;
+		margin-top: 2em;
 		padding: 0 constants.$sidebar-width;
+		overflow: auto;
 	}
 </style>
