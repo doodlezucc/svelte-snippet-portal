@@ -12,18 +12,6 @@
 		'bottom-center': [0.5, 1],
 		'bottom-right': [1, 1]
 	};
-
-	const ALIGNMENT_INVERSE = {
-		'top-left': 'bottom-right',
-		'top-center': 'bottom-center',
-		'top-right': 'bottom-left',
-		'center-left': 'center-right',
-		center: 'center',
-		'center-right': 'center-left',
-		'bottom-left': 'top-right',
-		'bottom-center': 'top-center',
-		'bottom-right': 'top-left'
-	} satisfies Record<Alignment, Alignment>;
 </script>
 
 <script lang="ts">
@@ -39,7 +27,7 @@
 		children: Snippet;
 	}
 
-	let { origin, alignment = ALIGNMENT_INVERSE[origin], portal, children }: Props = $props();
+	let { origin, alignment = origin, portal, children }: Props = $props();
 
 	let anchorWrapper = $state<HTMLElement>();
 	let anchorElement = $state<HTMLElement>();
@@ -90,14 +78,15 @@
 
 	let originHorizontal = $derived(ALIGNMENT_MAPPING[origin][0]);
 	let originVertical = $derived(ALIGNMENT_MAPPING[origin][1]);
+
 	let alignHorizontal = $derived(ALIGNMENT_MAPPING[alignment][0]);
 	let alignVertical = $derived(ALIGNMENT_MAPPING[alignment][1]);
 
 	let childXUnclamped = $derived(
-		!rect ? 0 : rect.x + originHorizontal * rect.width - childWidth * alignHorizontal
+		!rect ? 0 : rect.x + originHorizontal * rect.width - childWidth * (1 - alignHorizontal)
 	);
 	let childYUnclamped = $derived(
-		!rect ? 0 : rect.y + originVertical * rect.height - childHeight * alignVertical
+		!rect ? 0 : rect.y + originVertical * rect.height - childHeight * (1 - alignVertical)
 	);
 
 	let childX = $derived(Math.min(Math.max(childXUnclamped, VIEWPORT_MARGIN), maxX));

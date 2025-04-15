@@ -26,7 +26,7 @@
 		{/snippet}
 	</Anchor>
 
-	<Anchor origin="bottom-left" alignment="top-center">
+	<Anchor origin="bottom-left" alignment="bottom-center">
 		<textarea></textarea>
 
 		{#snippet portal()}
