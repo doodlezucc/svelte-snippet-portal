@@ -7,10 +7,10 @@
 		<Link href="/">Overview</Link>
 
 		<ul>
-			<h3>Examples</h3>
+			<h3>Recipes</h3>
 			<Link href="/examples/tooltip">Tooltip</Link>
 			<Link href="/examples/dialog">Dialog</Link>
-			<Link href="/examples/custom-space">Custom Space</Link>
+			<Link href="/examples/custom-destination">Custom Destination</Link>
 		</ul>
 	</ul>
 </aside>

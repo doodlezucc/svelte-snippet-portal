@@ -6,7 +6,7 @@
 	let spaceB = $state<PortalSpace>();
 </script>
 
-<h1>Custom Space</h1>
+<h1>Custom Destination</h1>
 
 <p>
 	The <code>Space</code> component is used by the <code>PortalOverlay</code> component to mount snippets
