@@ -24,7 +24,7 @@
 
 	interface Props {
 		origin: Alignment;
-		alignment?: Alignment;
+		direction?: Alignment;
 		inheritWidth?: SizeInheritMode;
 		inheritHeight?: SizeInheritMode;
 		portal: Snippet;
@@ -36,7 +36,7 @@
 
 	let {
 		origin,
-		alignment = origin,
+		direction = origin,
 		inheritWidth = false,
 		inheritHeight = false,
 		portal,
@@ -93,8 +93,8 @@
 	let originHorizontal = $derived(ALIGNMENT_MAPPING[origin][0]);
 	let originVertical = $derived(ALIGNMENT_MAPPING[origin][1]);
 
-	let alignHorizontal = $derived(ALIGNMENT_MAPPING[alignment][0]);
-	let alignVertical = $derived(ALIGNMENT_MAPPING[alignment][1]);
+	let alignHorizontal = $derived(ALIGNMENT_MAPPING[direction][0]);
+	let alignVertical = $derived(ALIGNMENT_MAPPING[direction][1]);
 
 	let childXUnclamped = $derived(
 		!rect ? 0 : rect.x + originHorizontal * rect.width - childWidth * (1 - alignHorizontal)

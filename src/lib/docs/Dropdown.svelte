@@ -45,7 +45,7 @@
 
 <svelte:window onmouseup={expanded ? () => (expanded = false) : undefined} />
 
-<Anchor origin="bottom-right" alignment="bottom-left" inheritWidth>
+<Anchor origin="bottom-right" direction="bottom-left" inheritWidth>
 	<div
 		role="combobox"
 		aria-controls={popupId}

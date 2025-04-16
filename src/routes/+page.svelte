@@ -2,7 +2,7 @@
 	import type { Alignment } from '$lib/index.js';
 	import DisplayAnchor from './DisplayAnchor.svelte';
 
-	let alignment = $state<Alignment>();
+	let direction = $state<Alignment>();
 </script>
 
 <h1>Svelte Snippet Portal</h1>
@@ -25,15 +25,15 @@
 </p>
 
 <div class="grid">
-	<DisplayAnchor {alignment} origin="top-left" />
-	<DisplayAnchor {alignment} origin="top-center" />
-	<DisplayAnchor {alignment} origin="top-right" />
-	<DisplayAnchor {alignment} origin="center-left" />
-	<DisplayAnchor {alignment} origin="center" />
-	<DisplayAnchor {alignment} origin="center-right" />
-	<DisplayAnchor {alignment} origin="bottom-left" />
-	<DisplayAnchor {alignment} origin="bottom-center" />
-	<DisplayAnchor {alignment} origin="bottom-right" />
+	<DisplayAnchor {direction} origin="top-left" />
+	<DisplayAnchor {direction} origin="top-center" />
+	<DisplayAnchor {direction} origin="top-right" />
+	<DisplayAnchor {direction} origin="center-left" />
+	<DisplayAnchor {direction} origin="center" />
+	<DisplayAnchor {direction} origin="center-right" />
+	<DisplayAnchor {direction} origin="bottom-left" />
+	<DisplayAnchor {direction} origin="bottom-center" />
+	<DisplayAnchor {direction} origin="bottom-right" />
 </div>
 
 <style lang="scss">

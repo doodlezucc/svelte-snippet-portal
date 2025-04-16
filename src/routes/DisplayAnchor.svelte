@@ -3,21 +3,21 @@
 
 	interface Props {
 		origin: Alignment;
-		alignment?: Alignment;
+		direction?: Alignment;
 	}
 
-	let { origin, alignment }: Props = $props();
+	let { origin, direction }: Props = $props();
 </script>
 
-<Anchor {origin} {alignment}>
+<Anchor {origin} {direction}>
 	<div>
 		{origin}
 	</div>
 
 	{#snippet portal()}
 		<span>
-			{#if alignment}
-				{alignment}
+			{#if direction}
+				{direction}
 			{:else}
 				default
 			{/if}
