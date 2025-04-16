@@ -19,14 +19,6 @@
 			GitHub
 		{/snippet}
 	</Tooltip>
-
-	<Tooltip alignment="bottom-center">
-		<a href="https://github.com/doodlezucc/svelte-snippet-portal"><GitHubIcon /></a>
-
-		{#snippet tooltip()}
-			Yeah!
-		{/snippet}
-	</Tooltip>
 </header>
 
 <style lang="scss">
@@ -51,5 +43,9 @@
 	a {
 		color: scheme.color('text');
 		display: inline-flex;
+	}
+
+	.expand {
+		flex: 1;
 	}
 </style>
