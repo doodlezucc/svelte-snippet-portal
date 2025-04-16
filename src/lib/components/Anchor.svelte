@@ -12,6 +12,8 @@
 		'bottom-center': [0.5, 1],
 		'bottom-right': [1, 1]
 	};
+
+	export type SizeInheritMode = boolean | 'constrain';
 </script>
 
 <script lang="ts">
@@ -23,11 +25,20 @@
 	interface Props {
 		origin: Alignment;
 		alignment?: Alignment;
+		inheritWidth?: SizeInheritMode;
+		inheritHeight?: SizeInheritMode;
 		portal: Snippet;
 		children: Snippet;
 	}
 
-	let { origin, alignment = origin, portal, children }: Props = $props();
+	let {
+		origin,
+		alignment = origin,
+		inheritWidth = false,
+		inheritHeight = false,
+		portal,
+		children
+	}: Props = $props();
 
 	let anchorWrapper = $state<HTMLElement>();
 	let anchorElement = $state<HTMLElement>();
@@ -103,6 +114,19 @@
 		anchorElement = anchorWrapper!.children[0] as HTMLElement;
 	}
 
+	let cssVariables = $derived({
+		x: childX,
+		y: childY,
+		...(inheritWidth && rect ? { w: rect.width } : {}),
+		...(inheritHeight && rect ? { h: rect.height } : {})
+	});
+
+	let cssStyle = $derived(
+		Object.entries(cssVariables)
+			.map(([key, value]) => `--${key}: ${value}px;`)
+			.join(' ')
+	);
+
 	// Update renderedText whenever the content of the popover changes
 	onMount(() => {
 		updateAnchorElement();
@@ -134,9 +158,11 @@
 	<Portal>
 		<div
 			class="popover"
+			data-inherit-width={inheritWidth}
+			data-inherit-height={inheritHeight}
 			bind:clientWidth={childWidth}
 			bind:clientHeight={childHeight}
-			style="--x: {childX}px; --y: {childY}px;"
+			style={cssStyle}
 		>
 			{@render portal()}
 		</div>
@@ -152,5 +178,19 @@
 		position: absolute;
 		display: inline-flex;
 		transform: translate(var(--x), var(--y));
+
+		&[data-inherit-width='true'] {
+			width: var(--w);
+		}
+		&[data-inherit-width='constrain'] {
+			max-width: var(--w);
+		}
+
+		&[data-inherit-height='true'] {
+			height: var(--h);
+		}
+		&[data-inherit-height='constrain'] {
+			max-height: var(--h);
+		}
 	}
 </style>
