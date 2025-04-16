@@ -63,7 +63,7 @@
 
 	{#snippet portal()}
 		{#if expanded}
-			<ul role="listbox" id={popupId} transition:fly={{ y: -10, duration: 200 }}>
+			<ul role="listbox" id={popupId} transition:fly={{ y: -2, duration: 200 }}>
 				{#each options as option}
 					<li
 						role="option"

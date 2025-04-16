@@ -29,6 +29,9 @@
 		inheritHeight?: SizeInheritMode;
 		portal: Snippet;
 		children: Snippet;
+
+		/** The wrapped HTML element used as a reference for positioning the portal (read-only). */
+		wrappedElement?: HTMLElement;
 	}
 
 	let {
@@ -37,11 +40,11 @@
 		inheritWidth = false,
 		inheritHeight = false,
 		portal,
-		children
+		children,
+		wrappedElement = $bindable()
 	}: Props = $props();
 
 	let anchorWrapper = $state<HTMLElement>();
-	let anchorElement = $state<HTMLElement>();
 	let rect = $state<DOMRect>();
 
 	let update = $state(true);
@@ -50,8 +53,8 @@
 	function updateRect() {
 		if (!update) return;
 
-		if (anchorElement) {
-			rect = anchorElement.getBoundingClientRect();
+		if (wrappedElement) {
+			rect = wrappedElement.getBoundingClientRect();
 		}
 
 		animationFrameRequest = requestAnimationFrame(updateRect);
@@ -107,11 +110,11 @@
 		const children = anchorWrapper!.children;
 
 		if (children.length < 1) {
-			anchorElement = undefined;
+			wrappedElement = undefined;
 			throw new Error('Anchor must have exactly one child element');
 		}
 
-		anchorElement = anchorWrapper!.children[0] as HTMLElement;
+		wrappedElement = anchorWrapper!.children[0] as HTMLElement;
 	}
 
 	let cssVariables = $derived({
