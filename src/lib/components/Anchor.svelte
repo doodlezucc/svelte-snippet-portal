@@ -176,7 +176,7 @@
 
 	.popover {
 		position: absolute;
-		display: inline-flex;
+		display: grid;
 		transform: translate(var(--x), var(--y));
 
 		&[data-inherit-width='true'] {

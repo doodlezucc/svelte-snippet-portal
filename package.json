@@ -62,7 +62,8 @@
 	"dependencies": {
 		"@fontsource-variable/montserrat": "^5.2.5",
 		"@fontsource-variable/roboto-mono": "^5.2.5",
-		"@fontsource/merriweather": "^5.2.6"
+		"@fontsource/merriweather": "^5.2.6",
+		"@lucide/svelte": "^0.488.0"
 	},
 	"keywords": [
 		"svelte"
