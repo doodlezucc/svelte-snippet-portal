@@ -1,5 +1,0 @@
-@mixin define-constants() {
-	--sidebar-width: max(40px, calc(50vw - 480px));
-}
-
-$sidebar-width: var(--sidebar-width);

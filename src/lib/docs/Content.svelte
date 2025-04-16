@@ -8,17 +8,20 @@
 	let { children }: Props = $props();
 </script>
 
-<div>
-	{@render children()}
+<div class="container">
+	<div class="content">
+		{@render children()}
+	</div>
 </div>
 
 <style lang="scss">
-	@use '$lib/docs/style/constants.scss';
+	.container {
+		width: 100%;
+		padding: 2em 6em;
+		overflow-y: auto;
+	}
 
-	div {
-		margin: 0 6em;
-		margin-top: 2em;
-		padding: 0 constants.$sidebar-width;
-		overflow: auto;
+	.content {
+		max-width: 800px;
 	}
 </style>

@@ -1,4 +1,3 @@
-@use './constants.scss';
 @use './scheme.scss';
 
 $font-header: 'Merriweather', serif;
@@ -7,7 +6,6 @@ $font-monospace: 'Roboto Mono Variable', monospace;
 
 :root {
 	@include scheme.define-scheme();
-	@include constants.define-constants();
 
 	font-family: $font-body;
 	font-size: 18px;
