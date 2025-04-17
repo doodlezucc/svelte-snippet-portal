@@ -3,13 +3,32 @@
 	import MoonIcon from '@lucide/svelte/icons/moon';
 	import SendToBackIcon from '@lucide/svelte/icons/send-to-back';
 	import SunIcon from '@lucide/svelte/icons/sun';
+	import { onMount } from 'svelte';
 	import IconButton from './IconButton.svelte';
 	import Tooltip from './Tooltip.svelte';
+	import { persisted } from './persisted-state.svelte.js';
 
-	let isDarkModeEnabled = $state(false);
+	type Theme = 'light' | 'dark';
+	const theme = persisted<Theme | null>('dark-mode', null);
+
+	let prefersDarkMode = $state<boolean>(false);
+	let isDarkModeEnabled = $derived(theme.value ? theme.value === 'dark' : prefersDarkMode);
+
+	function onMediaQueryChange({ matches }: MediaQueryListEvent) {
+		prefersDarkMode = matches;
+	}
+
+	onMount(() => {
+		const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
+		mediaQuery.addEventListener('change', onMediaQueryChange);
+
+		return () => {
+			mediaQuery.removeEventListener('change', onMediaQueryChange);
+		};
+	});
 </script>
 
-<header class:dark-mode={isDarkModeEnabled}>
+<header data-theme={theme.value ?? undefined}>
 	<a class="logo" href="/">
 		<SendToBackIcon />
 		Svelte Snippet Portal
@@ -20,10 +39,12 @@
 	<IconButton
 		icon={isDarkModeEnabled ? SunIcon : MoonIcon}
 		tooltipAlignment="bottom-center"
-		onclick={() => (isDarkModeEnabled = !isDarkModeEnabled)}
+		onclick={() => (theme.value = isDarkModeEnabled ? 'light' : 'dark')}
 	>
 		{isDarkModeEnabled ? 'Use light mode' : 'Use dark mode'}
 	</IconButton>
+
+	<div class="divider"></div>
 
 	<Tooltip alignment="bottom-center">
 		<a href="https://github.com/doodlezucc/svelte-snippet-portal"><GitHubIcon /></a>
@@ -60,5 +81,11 @@
 
 	.expand {
 		flex: 1;
+	}
+
+	.divider {
+		background-color: scheme.color('separator');
+		width: 1px;
+		height: 100%;
 	}
 </style>

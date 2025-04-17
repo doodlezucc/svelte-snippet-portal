@@ -21,11 +21,11 @@
 	@include define-color('primary', #e6431a);
 	@include define-color('secondary', #dcecff);
 
-	@include define-color('shade-1', #f7f7f7);
-	@include define-color('shade-2', #dbdbdb);
-
 	@include define-color('text-dark', #161616);
 	@include define-color('text-light', #ffffff);
+
+	@include define-color('shade-1', #f7f7f7);
+	@include define-color('shade-2', #dbdbdb);
 
 	@include define-color('background', color('text-light'));
 	@include define-color('text', color('text-dark'));
@@ -43,11 +43,11 @@
 	@include define-color('primary', #ff7856);
 	@include define-color('secondary', #425983);
 
-	@include define-color('shade-1', #1f1f1f);
-	@include define-color('shade-2', #3a3a3a);
-
 	@include define-color('text-dark', #1b1b1b);
 	@include define-color('text-light', #e0e0e0);
+
+	@include define-color('shade-1', #1f1f1f);
+	@include define-color('shade-2', #3a3a3a);
 
 	@include define-color('background', color('text-dark'));
 	@include define-color('text', color('text-light'));

@@ -11,13 +11,13 @@ $font-monospace: 'Roboto Mono Variable', monospace;
 	font-family: $font-body;
 	font-size: 18px;
 
-	&:has(.dark-mode) {
+	&:has([data-theme='dark']) {
 		@include scheme.define-scheme-dark();
 	}
 }
 
 @media (prefers-color-scheme: dark) {
-	:root {
+	:root:not(:has([data-theme='light'])) {
 		@include scheme.define-scheme-dark();
 	}
 }
