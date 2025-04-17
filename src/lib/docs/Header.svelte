@@ -11,7 +11,7 @@
 	type Theme = 'light' | 'dark';
 	const theme = persisted<Theme | null>('dark-mode', null);
 
-	let prefersDarkMode = $state<boolean>(false);
+	let prefersDarkMode = $state<boolean>();
 	let isDarkModeEnabled = $derived(theme.value ? theme.value === 'dark' : prefersDarkMode);
 
 	function onMediaQueryChange({ matches }: MediaQueryListEvent) {
@@ -36,13 +36,16 @@
 
 	<div class="expand"></div>
 
-	<IconButton
-		icon={isDarkModeEnabled ? SunIcon : MoonIcon}
-		tooltipAlignment="bottom-center"
-		onclick={() => (theme.value = isDarkModeEnabled ? 'light' : 'dark')}
-	>
-		{isDarkModeEnabled ? 'Use light mode' : 'Use dark mode'}
-	</IconButton>
+	<!-- Render client-side only -->
+	{#if isDarkModeEnabled !== undefined}
+		<IconButton
+			icon={isDarkModeEnabled ? SunIcon : MoonIcon}
+			tooltipAlignment="bottom-center"
+			onclick={() => (theme.value = isDarkModeEnabled ? 'light' : 'dark')}
+		>
+			{isDarkModeEnabled ? 'Use light mode' : 'Use dark mode'}
+		</IconButton>
+	{/if}
 
 	<div class="divider"></div>
 
