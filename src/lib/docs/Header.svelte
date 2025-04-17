@@ -1,16 +1,29 @@
 <script lang="ts">
 	import GitHubIcon from '@lucide/svelte/icons/github';
+	import MoonIcon from '@lucide/svelte/icons/moon';
 	import SendToBackIcon from '@lucide/svelte/icons/send-to-back';
+	import SunIcon from '@lucide/svelte/icons/sun';
+	import IconButton from './IconButton.svelte';
 	import Tooltip from './Tooltip.svelte';
+
+	let isDarkModeEnabled = $state(false);
 </script>
 
-<header>
+<header class:dark-mode={isDarkModeEnabled}>
 	<a class="logo" href="/">
 		<SendToBackIcon />
 		Svelte Snippet Portal
 	</a>
 
 	<div class="expand"></div>
+
+	<IconButton
+		icon={isDarkModeEnabled ? SunIcon : MoonIcon}
+		tooltipAlignment="bottom-center"
+		onclick={() => (isDarkModeEnabled = !isDarkModeEnabled)}
+	>
+		{isDarkModeEnabled ? 'Use light mode' : 'Use dark mode'}
+	</IconButton>
 
 	<Tooltip alignment="bottom-center">
 		<a href="https://github.com/doodlezucc/svelte-snippet-portal"><GitHubIcon /></a>

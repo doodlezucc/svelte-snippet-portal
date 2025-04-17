@@ -32,12 +32,14 @@
 		text-align: center;
 		padding: 20px;
 		background-color: scheme.color('primary');
-		color: scheme.color('text-light');
+		color: scheme.color('on-primary');
+		font-weight: 500;
 	}
 
 	span {
 		padding: 4px;
 		background-color: scheme.color('secondary');
-		color: scheme.color('text');
+		color: scheme.color('on-secondary');
+		font-weight: 500;
 	}
 </style>

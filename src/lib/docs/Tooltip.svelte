@@ -54,9 +54,10 @@
 
 	[role='tooltip'] {
 		padding: 4px 12px;
-		background-color: scheme.color('text');
-		color: scheme.color('text-light');
+		background-color: scheme.color('tooltip-background');
+		color: scheme.color('tooltip-text');
 		font-size: 0.8rem;
+		font-weight: 500;
 
 		opacity: 0;
 		margin: 0;

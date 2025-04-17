@@ -41,7 +41,7 @@
 
 	.primary {
 		background-color: scheme.color('primary');
-		color: scheme.color('text-light');
+		color: scheme.color('on-primary');
 	}
 
 	.grid {

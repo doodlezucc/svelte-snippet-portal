@@ -6,9 +6,20 @@ $font-monospace: 'Roboto Mono Variable', monospace;
 
 :root {
 	@include scheme.define-scheme();
+	@include scheme.define-scheme-light();
 
 	font-family: $font-body;
 	font-size: 18px;
+
+	&:has(.dark-mode) {
+		@include scheme.define-scheme-dark();
+	}
+}
+
+@media (prefers-color-scheme: dark) {
+	:root {
+		@include scheme.define-scheme-dark();
+	}
 }
 
 :root,
@@ -35,6 +46,11 @@ h3 {
 	margin-top: 2em;
 }
 
+::selection {
+	color: scheme.color('background');
+	background-color: scheme.color('selection');
+}
+
 a {
 	color: scheme.color('primary');
 	text-decoration: none;
@@ -50,7 +66,7 @@ code {
 	font-weight: normal;
 
 	background-color: scheme.color('secondary');
-	color: black;
+	color: scheme.color('on-secondary');
 	padding: 2px 4px;
 	border-radius: 8px;
 }
