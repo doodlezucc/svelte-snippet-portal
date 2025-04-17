@@ -18,7 +18,7 @@
 </p>
 
 <p>
-	We can make use of an <code>Anchor</code> to mount a dropdown menu <i>right under</i> our input field!
+	We can make use of an <code>Tether</code> to mount a dropdown menu <i>right under</i> our input field!
 </p>
 
 <Dropdown {options} bind:value />

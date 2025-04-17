@@ -44,7 +44,7 @@
 		wrappedElement = $bindable()
 	}: Props = $props();
 
-	let anchorWrapper = $state<HTMLElement>();
+	let referenceWrapper = $state<HTMLElement>();
 	let rect = $state<DOMRect>();
 
 	let update = $state(true);
@@ -106,15 +106,15 @@
 	let childX = $derived(Math.min(Math.max(childXUnclamped, VIEWPORT_MARGIN), maxX));
 	let childY = $derived(Math.min(Math.max(childYUnclamped, VIEWPORT_MARGIN), maxY));
 
-	function updateAnchorElement() {
-		const children = anchorWrapper!.children;
+	function updateWrappedElement() {
+		const children = referenceWrapper!.children;
 
 		if (children.length < 1) {
 			wrappedElement = undefined;
-			throw new Error('Anchor must have exactly one child element');
+			throw new Error('Tether must have exactly one child element');
 		}
 
-		wrappedElement = anchorWrapper!.children[0] as HTMLElement;
+		wrappedElement = referenceWrapper!.children[0] as HTMLElement;
 	}
 
 	let cssVariables = $derived({
@@ -132,13 +132,13 @@
 
 	// Update renderedText whenever the content of the popover changes
 	onMount(() => {
-		updateAnchorElement();
+		updateWrappedElement();
 
 		const observer = new MutationObserver(() => {
-			updateAnchorElement();
+			updateWrappedElement();
 		});
 
-		observer.observe(anchorWrapper!, { childList: true });
+		observer.observe(referenceWrapper!, { childList: true });
 
 		return () => {
 			observer.disconnect();
@@ -153,11 +153,11 @@
 	}}
 />
 
-<div class="anchor" bind:this={anchorWrapper}>
+<div class="tether" bind:this={referenceWrapper}>
 	{@render children()}
 </div>
 
-{#if anchorWrapper}
+{#if referenceWrapper}
 	<Portal>
 		<div
 			class="popover"
@@ -173,7 +173,7 @@
 {/if}
 
 <style>
-	.anchor {
+	.tether {
 		display: contents;
 	}
 

@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { Anchor } from '$lib/index.js';
+	import { Tether } from '$lib/index.js';
 	import ChevronDownIcon from '@lucide/svelte/icons/chevron-down';
 	import { fly } from 'svelte/transition';
 
@@ -45,7 +45,7 @@
 
 <svelte:window onmouseup={expanded ? () => (expanded = false) : undefined} />
 
-<Anchor origin="bottom-right" direction="bottom-left" inheritWidth>
+<Tether origin="bottom-right" direction="bottom-left" inheritWidth>
 	<div
 		role="combobox"
 		aria-controls={popupId}
@@ -78,7 +78,7 @@
 			</ul>
 		{/if}
 	{/snippet}
-</Anchor>
+</Tether>
 
 <style lang="scss">
 	@use '$lib/docs/style/scheme';

@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { Anchor, type Alignment } from '$lib/index.js';
+	import { Tether, type Alignment } from '$lib/index.js';
 
 	interface Props {
 		origin: Alignment;
@@ -9,7 +9,7 @@
 	let { origin, direction }: Props = $props();
 </script>
 
-<Anchor {origin} {direction}>
+<Tether {origin} {direction}>
 	<div>
 		{origin}
 	</div>
@@ -23,7 +23,7 @@
 			{/if}
 		</span>
 	{/snippet}
-</Anchor>
+</Tether>
 
 <style lang="scss">
 	@use '$lib/docs/style/scheme';

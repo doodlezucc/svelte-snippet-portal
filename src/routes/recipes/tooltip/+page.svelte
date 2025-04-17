@@ -5,7 +5,7 @@
 <h1>Tooltip</h1>
 
 <p>
-	Tooltips are essentially just elements positioned by an <code>Anchor</code>, with the added trait
+	Tooltips are essentially just elements positioned by an <code>Tether</code>, with the added trait
 	of only being visible when the wrapped element is hovered.
 </p>
 

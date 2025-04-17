@@ -14,7 +14,7 @@
 	let usedSpace = $derived(space ?? overlay.space);
 
 	$effect(() => {
-		// Without "untrack", infinite recursion would occur when used by the Anchor component.
+		// Without "untrack", infinite recursion would occur when used by the Tether component.
 		const space = usedSpace;
 		const mountedPortal = untrack(() => space.mountPortal(children));
 

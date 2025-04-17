@@ -1,6 +1,6 @@
 <script lang="ts">
 	import type { Alignment } from '$lib/index.js';
-	import DisplayAnchor from './DisplayAnchor.svelte';
+	import ExampleTether from './ExampleTether.svelte';
 
 	let direction = $state<Alignment>();
 </script>
@@ -12,28 +12,30 @@
 	elements.
 </p>
 
-<h2>{'<Anchor>'}</h2>
+<h2>{'<Tether>'}</h2>
 
 <p>
-	Anchors are wrapped around an element and provide a way to mount custom content
+	Tethers are wrapped around an element and provide a way to mount custom content
 	<i>in relation</i> to the wrapped element.
 </p>
 
 <p>
-	An anchor can be aligned with 2 properties named <code class="primary">origin</code> and
+	A <code>Tether</code> component can be aligned with 2 properties named
+	<code class="primary">origin</code>
+	and
 	<code>direction</code>.
 </p>
 
 <div class="grid">
-	<DisplayAnchor {direction} origin="top-left" />
-	<DisplayAnchor {direction} origin="top-center" />
-	<DisplayAnchor {direction} origin="top-right" />
-	<DisplayAnchor {direction} origin="center-left" />
-	<DisplayAnchor {direction} origin="center" />
-	<DisplayAnchor {direction} origin="center-right" />
-	<DisplayAnchor {direction} origin="bottom-left" />
-	<DisplayAnchor {direction} origin="bottom-center" />
-	<DisplayAnchor {direction} origin="bottom-right" />
+	<ExampleTether {direction} origin="top-left" />
+	<ExampleTether {direction} origin="top-center" />
+	<ExampleTether {direction} origin="top-right" />
+	<ExampleTether {direction} origin="center-left" />
+	<ExampleTether {direction} origin="center" />
+	<ExampleTether {direction} origin="center-right" />
+	<ExampleTether {direction} origin="bottom-left" />
+	<ExampleTether {direction} origin="bottom-center" />
+	<ExampleTether {direction} origin="bottom-right" />
 </div>
 
 <style lang="scss">

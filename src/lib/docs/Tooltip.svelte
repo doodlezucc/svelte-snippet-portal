@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { Anchor, type Alignment } from '$lib/index.js';
+	import { Tether, type Alignment } from '$lib/index.js';
 	import { type Snippet } from 'svelte';
 
 	interface Props {
@@ -27,7 +27,7 @@
 	});
 </script>
 
-<Anchor origin={alignment} bind:wrappedElement>
+<Tether origin={alignment} bind:wrappedElement>
 	{@render children()}
 
 	{#snippet portal()}
@@ -35,7 +35,7 @@
 			{@render tooltip()}
 		</div>
 	{/snippet}
-</Anchor>
+</Tether>
 
 <svelte:head>
 	{@html `<style>
