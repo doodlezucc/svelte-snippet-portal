@@ -15,6 +15,8 @@
 </div>
 
 <style lang="scss">
+	@use '$lib/docs/style/scheme';
+
 	.container {
 		width: 100%;
 		padding: 2em 6em;
@@ -23,5 +25,8 @@
 
 	.content {
 		max-width: 800px;
+		border-bottom: 1px solid scheme.color('separator');
+		padding-bottom: 2em;
+		margin-bottom: 2em;
 	}
 </style>

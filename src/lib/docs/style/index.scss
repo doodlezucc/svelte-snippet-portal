@@ -10,6 +10,7 @@ $font-monospace: 'Roboto Mono Variable', monospace;
 
 	font-family: $font-body;
 	font-size: 18px;
+	line-height: 1.6;
 
 	&:has([data-theme='dark']) {
 		@include scheme.define-scheme-dark();

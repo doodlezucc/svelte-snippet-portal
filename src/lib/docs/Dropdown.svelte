@@ -11,8 +11,7 @@
 	let { options, value = $bindable() }: Props = $props();
 
 	let expanded = $state(false);
-
-	let popupId = $state(crypto.randomUUID());
+	let popupId = $props.id();
 
 	function onSelect(option: string) {
 		value = option;
@@ -45,7 +44,7 @@
 
 <svelte:window onmouseup={expanded ? () => (expanded = false) : undefined} />
 
-<Tether origin="bottom-right" direction="bottom-left" inheritWidth>
+<Tether origin="bottom-center" inheritWidth>
 	<div
 		role="combobox"
 		aria-controls={popupId}
@@ -84,7 +83,7 @@
 	@use '$lib/docs/style/scheme';
 
 	[role='combobox'] {
-		border: 1px solid scheme.color('text');
+		border: 1px solid scheme.color('shade-3');
 		border-radius: 8px;
 		padding: 10px 12px;
 		background: scheme.color('background');
