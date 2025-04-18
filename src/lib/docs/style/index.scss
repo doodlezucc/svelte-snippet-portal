@@ -11,6 +11,7 @@ $font-monospace: 'Roboto Mono Variable', monospace;
 	font-family: $font-body;
 	font-size: 18px;
 	line-height: 1.6;
+	tab-size: 4;
 
 	&:has([data-theme='dark']) {
 		@include scheme.define-scheme-dark();
@@ -61,7 +62,6 @@ a {
 	}
 }
 
-pre,
 code {
 	font-family: $font-monospace;
 	font-weight: normal;
@@ -70,4 +70,16 @@ code {
 	color: scheme.color('on-secondary');
 	padding: 2px 4px;
 	border-radius: 8px;
+}
+
+.shiki {
+	padding: 12px 16px;
+	border: 1px solid scheme.color('separator');
+	border-radius: 8px;
+	font-size: 16px;
+
+	> code {
+		background: none;
+		padding: 0;
+	}
 }

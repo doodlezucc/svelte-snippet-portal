@@ -1,5 +1,6 @@
 <script lang="ts">
 	import Dropdown from '$lib/docs/Dropdown.svelte';
+	import Figure from '$lib/docs/Figure.svelte';
 
 	let options = $state(['Option A', 'Option B', 'Option C', 'Option D with a long name']);
 	let value = $state('Option A');
@@ -40,19 +41,14 @@
 	can then make use of a <code>Tether</code> to mount a custom dropdown menu <i>right under</i> the field.
 </p>
 
-<div>
+<Figure>
 	<Dropdown {options} bind:value />
-</div>
+</Figure>
 
 <p>(TODO: add code example here)</p>
 
 <style lang="scss">
 	@use '$lib/docs/style/scheme';
-
-	div {
-		place-self: center;
-		margin: 2em 0;
-	}
 
 	q {
 		display: block;
