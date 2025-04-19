@@ -1,6 +1,8 @@
 import adapter from '@sveltejs/adapter-auto';
 import { vitePreprocess } from '@sveltejs/vite-plugin-svelte';
 import MagicString from 'magic-string';
+import * as nodeFs from 'node:fs';
+import * as nodePath from 'node:path';
 import { createHighlighter } from 'shiki';
 
 /** @type {import('@sveltejs/kit').Config} */
@@ -13,7 +15,11 @@ const config = {
 		// adapter-auto only supports some environments, see https://svelte.dev/docs/kit/adapter-auto for a list.
 		// If your environment is not supported, or you settled on a specific environment, switch out the adapter.
 		// See https://svelte.dev/docs/kit/adapters for more information about adapters.
-		adapter: adapter()
+		adapter: adapter(),
+
+		alias: {
+			'svelte-snippet-portal': 'src/lib/index.js'
+		}
 	}
 };
 
@@ -28,29 +34,53 @@ export function shikiPreprocess() {
 
 	return {
 		name: 'shiki-preprocess',
-		markup: async ({ content }) => {
+		markup: async ({ content, filename }) => {
 			const shiki = await shikiPromise;
-
 			const s = new MagicString(content);
-			const matches = content.matchAll(/^{`(\S+)(.+?)`}/gms);
 
-			for (const match of matches) {
-				const [substring, language, code] = match;
-
+			function replace(match, language, code) {
 				const start = match.index;
-				const end = start + substring.length;
+				const end = start + match[0].length;
 
-				const shikiHtml = shiki.codeToHtml(code.trim(), {
+				let shikiHtml = shiki.codeToHtml(code.trim(), {
 					lang: language,
 					themes: { light: 'github-light', dark: 'dark-plus' },
 					tabindex: false
 				});
+				shikiHtml = shikiHtml.replaceAll(/`/gm, '\\`');
+				shikiHtml = shikiHtml.replaceAll(/{/gm, '\\{');
+
 				s.update(start, end, `{@html \`${shikiHtml}\`}`);
+			}
+
+			const inlineMatches = content.matchAll(/^{`([a-z]+)(.+?)`}/gms);
+
+			for (const match of inlineMatches) {
+				const [, language, code] = match;
+
+				replace(match, language, code);
+			}
+
+			const fileMatches = content.matchAll(/^{`(\.\S+)`}/gms);
+			const fileDependencies = [];
+
+			for (const match of fileMatches) {
+				const [, path] = match;
+
+				const mentionedFilePath = nodePath.resolve(nodePath.dirname(filename), path);
+				const fileContent = nodeFs.readFileSync(mentionedFilePath, { encoding: 'utf-8' });
+
+				const mentionedFileExtension = nodePath.extname(mentionedFilePath);
+				const guessedLanguage = mentionedFileExtension.slice(1);
+
+				replace(match, guessedLanguage, fileContent);
+				fileDependencies.push(mentionedFilePath);
 			}
 
 			return {
 				code: s.toString(),
-				map: s.generateMap()
+				map: s.generateMap(),
+				dependencies: fileDependencies
 			};
 		}
 	};
