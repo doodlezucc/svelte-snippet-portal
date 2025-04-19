@@ -1,22 +1,23 @@
 <script lang="ts">
-	import Dropdown from '$lib/docs/Dropdown.svelte';
 	import Figure from '$lib/docs/Figure.svelte';
+	import Dropdown from './Dropdown.svelte';
+	import DropdownUnstyled from './DropdownUnstyled.svelte';
 
-	let options = $state(['Option A', 'Option B', 'Option C', 'Option D with a long name']);
-	let value = $state('Option A');
+	let options = $state(['Lorem', 'Ipsum', 'Dolor', 'Sit', 'Amet']);
+	let value = $state('Lorem');
 </script>
 
 <h1>Dropdown</h1>
 
 <p>A dropdown menu is usually presented to the user when interacting with a combo box:</p>
 
-<div>
+<Figure>
 	<select>
 		{#each options as option}
 			<option>{option}</option>
 		{/each}
 	</select>
-</div>
+</Figure>
 
 <p>
 	In HTML, this UI component is implemented via the <i>select</i> element and a list of
@@ -42,10 +43,29 @@
 </p>
 
 <Figure>
+	<DropdownUnstyled {options} bind:value />
+</Figure>
+
+{`./DropdownUnstyled.svelte`}
+
+<h2>Styling</h2>
+
+<p>
+	You can also add a chevron icon to the text field and align the CSS with your site's scheme to get
+	nicer looking results.
+</p>
+
+<p>
+	For example, this multi-themed documentation makes use of CSS variables and the
+	<a href="https://sass-lang.com/">SCSS</a> language superset. The following is an extended version of
+	the component above, adjusted to fit in with the rest of the documentation pages.
+</p>
+
+<Figure>
 	<Dropdown {options} bind:value />
 </Figure>
 
-<p>(TODO: add code example here)</p>
+{`./Dropdown.svelte`}
 
 <style lang="scss">
 	@use '$lib/docs/style/scheme';

@@ -24,7 +24,7 @@
 	}
 
 	.content {
-		max-width: 800px;
+		max-width: 820px;
 		border-bottom: 1px solid scheme.color('separator');
 		padding-bottom: 2em;
 		margin-bottom: 2em;

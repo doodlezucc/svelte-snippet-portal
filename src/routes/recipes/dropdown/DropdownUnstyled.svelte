@@ -1,6 +1,5 @@
 <script lang="ts">
-	import { Tether } from '$lib/index.js';
-	import ChevronDownIcon from '@lucide/svelte/icons/chevron-down';
+	import { Tether } from 'svelte-snippet-portal';
 	import { fly } from 'svelte/transition';
 
 	interface Props {
@@ -54,10 +53,6 @@
 		onkeydown={onDropdownKeyDown}
 	>
 		<span>{value}</span>
-
-		<div class="icon">
-			<ChevronDownIcon />
-		</div>
 	</div>
 
 	{#snippet portal()}
@@ -79,70 +74,36 @@
 	{/snippet}
 </Tether>
 
-<style lang="scss">
-	@use '$lib/docs/style/scheme';
-
+<style>
 	[role='combobox'] {
-		border: 1px solid scheme.color('shade-3');
-		border-radius: 8px;
+		background-color: white;
+		color: black;
+		border: 1px solid black;
 		padding: 10px 12px;
-		background: scheme.color('background');
-		cursor: pointer;
-
 		width: 300px;
-		text-overflow: ellipsis;
-		white-space: nowrap;
-		overflow: hidden;
-
-		display: grid;
-		grid-template-columns: 1fr max-content;
-		transition: 0.2s;
-
-		&:hover {
-			background: scheme.color('shade-1');
-		}
-
-		.icon {
-			display: inline-flex;
-			transition: rotate 0.2s;
-		}
-
-		&[aria-expanded='true'] {
-			border-bottom-left-radius: 0;
-			border-bottom-right-radius: 0;
-
-			.icon {
-				rotate: 180deg;
-			}
-		}
+		cursor: pointer;
 	}
 
 	[role='listbox'] {
+		background-color: white;
+		color: black;
+		outline: 1px solid black;
 		margin: 0;
 		padding-inline-start: 0;
 		pointer-events: all;
-		background: scheme.color('background');
-		box-shadow: 2px 2px 0 #0005;
-		border: 1px solid scheme.color('shade-2');
-		border-top-width: 0;
-		border-radius: 8px;
-		border-top-left-radius: 0;
-		border-top-right-radius: 0;
-		overflow: auto;
 	}
 
 	[role='option'] {
 		list-style: none;
 		padding: 6px 16px;
 		cursor: pointer;
+	}
 
-		&:hover {
-			background-color: scheme.color('shade-1');
-		}
+	[role='option']:hover {
+		background-color: #888;
+	}
 
-		&[aria-selected='true'] {
-			color: scheme.color('primary');
-			font-weight: 600;
-		}
+	[role='option'][aria-selected='true'] {
+		font-weight: 600;
 	}
 </style>
