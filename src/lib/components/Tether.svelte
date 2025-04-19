@@ -67,9 +67,6 @@
 	let maxX = $derived(boundary.right - childWidth);
 	let maxY = $derived(boundary.bottom - childHeight);
 
-	$inspect(maxX);
-	$inspect(maxY);
-
 	let originHorizontal = $derived(ALIGNMENT_MAPPING[origin][0]);
 	let originVertical = $derived(ALIGNMENT_MAPPING[origin][1]);
 
@@ -86,15 +83,29 @@
 	let childX = $derived(Math.min(Math.max(childXUnclamped, boundary.left), maxX));
 	let childY = $derived(Math.min(Math.max(childYUnclamped, boundary.top), maxY));
 
-	function updateWrappedElement() {
-		const children = referenceWrapper!.children;
+	function findValidElement(parent: HTMLElement) {
+		const children = parent.children;
 
 		if (children.length < 1) {
 			wrappedElement = undefined;
 			throw new Error('Tether must have exactly one child element');
 		}
 
-		wrappedElement = referenceWrapper!.children[0] as HTMLElement;
+		const child = children[0] as HTMLElement;
+		if (child.clientWidth > 0 || child.clientHeight > 0) {
+			return child;
+		}
+
+		if (child.childElementCount === 0) {
+			// Child may have "display: contents", but no child elements can be used.
+			return child;
+		} else {
+			return findValidElement(child);
+		}
+	}
+
+	function updateWrappedElement() {
+		wrappedElement = findValidElement(referenceWrapper!);
 	}
 
 	let cssVariables = $derived({
@@ -117,7 +128,7 @@
 			updateWrappedElement();
 		});
 
-		observer.observe(referenceWrapper!, { childList: true });
+		observer.observe(referenceWrapper!, { childList: true, subtree: true });
 
 		return () => {
 			observer.disconnect();
