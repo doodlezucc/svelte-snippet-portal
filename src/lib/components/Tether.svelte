@@ -19,8 +19,8 @@
 <script lang="ts">
 	import { onMount, type Snippet } from 'svelte';
 	import Portal from './Portal.svelte';
-
-	const VIEWPORT_MARGIN = 0;
+	import { useOverlay } from './PortalOverlay.svelte';
+	import { useAnimationFrame } from './animation-frame.svelte.js';
 
 	interface Props {
 		origin: Alignment;
@@ -44,51 +44,31 @@
 		wrappedElement = $bindable()
 	}: Props = $props();
 
+	const overlay = useOverlay();
+
 	let referenceWrapper = $state<HTMLElement>();
 	let rect = $state<DOMRect>();
+	let boundary = $state(<DOMRect>{ top: 0, right: 1, bottom: 1, left: 0 });
 
-	let update = $state(true);
-	let animationFrameRequest = $state<number>();
-
-	function updateRect() {
-		if (!update) return;
-
+	useAnimationFrame(() => {
 		if (wrappedElement) {
 			rect = wrappedElement.getBoundingClientRect();
 		}
 
-		animationFrameRequest = requestAnimationFrame(updateRect);
-	}
-
-	$effect(() => {
-		if (update) {
-			animationFrameRequest = requestAnimationFrame(updateRect);
-		} else if (animationFrameRequest !== undefined) {
-			cancelAnimationFrame(animationFrameRequest);
-			animationFrameRequest = undefined;
+		const overlayRect = overlay.getRect();
+		if (overlayRect) {
+			boundary = overlayRect;
 		}
-	});
-
-	onMount(() => {
-		return () => {
-			if (animationFrameRequest !== undefined) {
-				cancelAnimationFrame(animationFrameRequest);
-			}
-		};
 	});
 
 	let childWidth = $state(0);
 	let childHeight = $state(0);
 
-	let viewportWidth = $state(0);
-	let viewportHeight = $state(0);
-	onMount(() => {
-		viewportWidth = window.innerWidth;
-		viewportHeight = window.innerHeight;
-	});
+	let maxX = $derived(boundary.right - childWidth);
+	let maxY = $derived(boundary.bottom - childHeight);
 
-	let maxX = $derived(viewportWidth - VIEWPORT_MARGIN - childWidth);
-	let maxY = $derived(viewportHeight - VIEWPORT_MARGIN - childHeight);
+	$inspect(maxX);
+	$inspect(maxY);
 
 	let originHorizontal = $derived(ALIGNMENT_MAPPING[origin][0]);
 	let originVertical = $derived(ALIGNMENT_MAPPING[origin][1]);
@@ -103,8 +83,8 @@
 		!rect ? 0 : rect.y + originVertical * rect.height - childHeight * (1 - alignVertical)
 	);
 
-	let childX = $derived(Math.min(Math.max(childXUnclamped, VIEWPORT_MARGIN), maxX));
-	let childY = $derived(Math.min(Math.max(childYUnclamped, VIEWPORT_MARGIN), maxY));
+	let childX = $derived(Math.min(Math.max(childXUnclamped, boundary.left), maxX));
+	let childY = $derived(Math.min(Math.max(childYUnclamped, boundary.top), maxY));
 
 	function updateWrappedElement() {
 		const children = referenceWrapper!.children;
@@ -130,7 +110,6 @@
 			.join(' ')
 	);
 
-	// Update renderedText whenever the content of the popover changes
 	onMount(() => {
 		updateWrappedElement();
 
@@ -146,13 +125,6 @@
 	});
 </script>
 
-<svelte:window
-	onresize={() => {
-		viewportWidth = window.innerWidth;
-		viewportHeight = window.innerHeight;
-	}}
-/>
-
 <div class="tether" bind:this={referenceWrapper}>
 	{@render children()}
 </div>
@@ -161,8 +133,8 @@
 	<Portal>
 		<div
 			class="popover"
-			data-inherit-width={inheritWidth}
-			data-inherit-height={inheritHeight}
+			data-inherit-width={inheritWidth || undefined}
+			data-inherit-height={inheritHeight || undefined}
 			bind:clientWidth={childWidth}
 			bind:clientHeight={childHeight}
 			style={cssStyle}

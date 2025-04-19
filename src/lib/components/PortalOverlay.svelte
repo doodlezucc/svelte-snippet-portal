@@ -6,6 +6,7 @@
 
 	export interface OverlayContext {
 		space: PortalSpace;
+		getRect: () => DOMRect | undefined;
 	}
 
 	export function useOverlay() {
@@ -15,22 +16,35 @@
 
 <script lang="ts">
 	import { setContext, type Snippet } from 'svelte';
+	import type { ClassValue } from 'svelte/elements';
 	import Space from './Space.svelte';
+	import { useAnimationFrame } from './animation-frame.svelte.js';
 
 	interface Props {
+		class?: ClassValue;
 		children: Snippet;
 	}
 
-	let { children }: Props = $props();
+	let { class: classValue, children }: Props = $props();
 
 	let space = $state<Space>();
+	let wrapper = $state<HTMLElement>();
+
+	let wrapperRect = $state<DOMRect>();
+
+	useAnimationFrame(() => {
+		if (wrapper) {
+			wrapperRect = wrapper.getBoundingClientRect();
+		}
+	});
 
 	setContext<OverlayContext>(OVERLAY_CONTEXT_KEY, {
 		space: {
 			mountPortal(snippet) {
 				return space!.mountPortal(snippet);
 			}
-		}
+		},
+		getRect: () => wrapperRect
 	});
 </script>
 
@@ -38,7 +52,9 @@
 	<Space bind:this={space} />
 </div>
 
-{@render children()}
+<div class={classValue} bind:this={wrapper}>
+	{@render children()}
+</div>
 
 <style>
 	.overlay {

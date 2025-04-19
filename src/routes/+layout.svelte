@@ -17,7 +17,7 @@
 	let { children }: Props = $props();
 </script>
 
-<PortalOverlay>
+<PortalOverlay class="global-portal-overlay">
 	<Header />
 
 	<main>
@@ -30,6 +30,12 @@
 </PortalOverlay>
 
 <style lang="scss">
+	:global(.global-portal-overlay) {
+		display: flex;
+		flex-direction: column;
+		height: 100vh;
+	}
+
 	main {
 		flex: 1;
 		position: relative;
