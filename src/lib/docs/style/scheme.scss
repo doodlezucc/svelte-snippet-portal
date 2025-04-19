@@ -19,6 +19,8 @@
 }
 
 @mixin define-scheme-light() {
+	color-scheme: light;
+
 	@include define-color('primary', #e6431a);
 	@include define-color('secondary', #dcecff);
 
@@ -43,6 +45,8 @@
 }
 
 @mixin define-scheme-dark() {
+	color-scheme: dark;
+
 	@include define-color('primary', #ff7856);
 	@include define-color('secondary', #425983);
 
