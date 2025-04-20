@@ -18,11 +18,12 @@
 	import { useAnimationFrame } from './animation-frame.svelte.js';
 
 	interface Props {
+		ignoreParentBoundary?: boolean;
 		class?: ClassValue;
 		children: Snippet;
 	}
 
-	let { class: classValue, children }: Props = $props();
+	let { ignoreParentBoundary = false, class: classValue, children }: Props = $props();
 
 	let wrapper = $state<HTMLElement>();
 	let wrapperRect = $state<DOMRect>();
@@ -33,8 +34,25 @@
 		}
 	});
 
+	const parentBoundary = getContext<TetherBoundaryContext | undefined>(BOUNDARY_CONTEXT_KEY);
+
 	setContext<TetherBoundaryContext>(BOUNDARY_CONTEXT_KEY, {
-		getRect: () => wrapperRect
+		getRect: () => {
+			if (!ignoreParentBoundary) {
+				const parentRect = parentBoundary?.getRect();
+
+				if (wrapperRect && parentRect) {
+					const left = Math.max(wrapperRect.x, parentRect.x);
+					const top = Math.max(wrapperRect.y, parentRect.y);
+					const right = Math.min(wrapperRect.right, parentRect.right);
+					const bottom = Math.min(wrapperRect.bottom, parentRect.bottom);
+
+					return new DOMRect(left, top, right - left, bottom - top);
+				}
+			}
+
+			return wrapperRect;
+		}
 	});
 </script>
 

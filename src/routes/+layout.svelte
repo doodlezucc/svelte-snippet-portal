@@ -5,6 +5,7 @@
 	import '@fontsource/merriweather';
 
 	import PortalOverlay from '$lib/components/PortalOverlay.svelte';
+	import TetherBoundary from '$lib/components/TetherBoundary.svelte';
 	import Content from '$lib/docs/Content.svelte';
 	import Header from '$lib/docs/Header.svelte';
 	import Sidebar from '$lib/docs/Sidebar.svelte';
@@ -23,9 +24,11 @@
 	<main>
 		<Sidebar />
 
-		<Content>
-			{@render children()}
-		</Content>
+		<TetherBoundary class="content-boundary">
+			<Content>
+				{@render children()}
+			</Content>
+		</TetherBoundary>
 	</main>
 </PortalOverlay>
 
@@ -34,6 +37,10 @@
 		display: flex;
 		flex-direction: column;
 		height: 100vh;
+	}
+
+	:global(.content-boundary) {
+		display: flex;
 	}
 
 	main {

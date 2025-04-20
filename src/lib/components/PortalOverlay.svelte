@@ -20,12 +20,17 @@
 	import TetherBoundary from './TetherBoundary.svelte';
 
 	interface Props {
+		/**
+		 * The CSS z-index property applied to the overlay.
+		 *
+		 * @default 10
+		 */
 		zIndex?: number;
 		class?: ClassValue;
 		children: Snippet;
 	}
 
-	let { zIndex = 999, class: classValue, children }: Props = $props();
+	let { zIndex = 10, class: classValue, children }: Props = $props();
 
 	let space = $state<Space>();
 
@@ -42,7 +47,7 @@
 	<Space bind:this={space} />
 </div>
 
-<TetherBoundary class={classValue}>
+<TetherBoundary class={classValue} ignoreParentBoundary>
 	{@render children()}
 </TetherBoundary>
 
