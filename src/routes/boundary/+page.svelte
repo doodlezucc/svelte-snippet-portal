@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { useAnimationFrame } from '$lib/components/animation-frame.svelte.js';
-	import { PortalOverlay, Tether } from 'svelte-snippet-portal';
+	import { Tether, TetherBoundary } from 'svelte-snippet-portal';
 	import { Spring } from 'svelte/motion';
 
 	interface Point {
@@ -66,23 +66,26 @@
 
 <p>
 	The <code>PortalOverlay</code> component should be part of your +layout.svelte if you want to use any
-	portal functionality.
+	portal functionality. This is because it acts as the default parent of all portals on your page.
 </p>
 
 <p>
-	However, the overlay has another use case. You can wrap certain regions of your Svelte page in
-	their own <code>PortalOverlay</code> to constrain the position of all the nested
-	<code>Tether</code> portals.
+	It also acts as the <b>outer boundary</b> for any <code>Tether</code> components you might use on your
+	page. The outer boundary is responsible for keeping all tethered elements (e.g. tooltips) visible within
+	the viewport.
+</p>
+
+<p>
+	By manually wrapping a <code>TetherBoundary</code> around a region of your page, you re-define the
+	limits of where nested tethered elements can go.
 </p>
 
 <p><b>Click and drag</b> in the area below to see this in action.</p>
 
 <div class="outer-boundary" bind:this={outerBoundary} onpointerdown={onPointerDown}>
-	<div class="content" {style}></div>
-
-	<PortalOverlay>
+	<TetherBoundary>
 		<div class="boundary">
-			<span class="boundary-header">{'<PortalOverlay>'}</span>
+			<span class="boundary-header">{'<TetherBoundary>'}</span>
 
 			<Tether origin="top-left">
 				{#snippet portal()}
@@ -94,12 +97,14 @@
 						<span>bottom-right</span>
 					{/snippet}
 
-					<div class="content hidden" {style}></div>
+					<div class="content" {style}></div>
 				</Tether>
 			</Tether>
 		</div>
-	</PortalOverlay>
+	</TetherBoundary>
 </div>
+
+<div class="space"></div>
 
 <style lang="scss">
 	@use '$lib/docs/style/scheme';
@@ -135,14 +140,14 @@
 		position: absolute;
 		left: var(--x, 50%);
 		top: var(--y, 50%);
-
-		&.hidden {
-			visibility: hidden;
-		}
 	}
 
 	span {
 		padding: 0px 4px;
 		outline: 1px solid scheme.color('primary');
+	}
+
+	.space {
+		height: 50em;
 	}
 </style>

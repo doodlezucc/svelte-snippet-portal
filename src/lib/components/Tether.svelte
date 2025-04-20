@@ -18,9 +18,9 @@
 
 <script lang="ts">
 	import { onMount, type Snippet } from 'svelte';
-	import Portal from './Portal.svelte';
-	import { useOverlay } from './PortalOverlay.svelte';
 	import { useAnimationFrame } from './animation-frame.svelte.js';
+	import Portal from './Portal.svelte';
+	import { useTetherBoundary } from './TetherBoundary.svelte';
 
 	interface Props {
 		origin: Alignment;
@@ -44,7 +44,7 @@
 		wrappedElement = $bindable()
 	}: Props = $props();
 
-	const overlay = useOverlay();
+	const tetherBoundary = useTetherBoundary();
 
 	let referenceWrapper = $state<HTMLElement>();
 	let rect = $state<DOMRect>();
@@ -55,7 +55,7 @@
 			rect = wrappedElement.getBoundingClientRect();
 		}
 
-		const overlayRect = overlay.getRect();
+		const overlayRect = tetherBoundary.getRect();
 		if (overlayRect) {
 			boundary = overlayRect;
 		}
