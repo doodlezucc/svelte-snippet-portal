@@ -108,19 +108,6 @@
 		wrappedElement = findValidElement(referenceWrapper!);
 	}
 
-	let cssVariables = $derived({
-		x: childX,
-		y: childY,
-		...(inheritWidth && rect ? { w: rect.width } : {}),
-		...(inheritHeight && rect ? { h: rect.height } : {})
-	});
-
-	let cssStyle = $derived(
-		Object.entries(cssVariables)
-			.map(([key, value]) => `--${key}: ${value}px;`)
-			.join(' ')
-	);
-
 	onMount(() => {
 		updateWrappedElement();
 
@@ -134,6 +121,10 @@
 			observer.disconnect();
 		};
 	});
+
+	function pixels(amount: number | undefined) {
+		return amount === undefined ? undefined : `${amount}px`;
+	}
 </script>
 
 <div class="tether" bind:this={referenceWrapper}>
@@ -148,7 +139,10 @@
 			data-inherit-height={inheritHeight || undefined}
 			bind:clientWidth={childWidth}
 			bind:clientHeight={childHeight}
-			style={cssStyle}
+			style:--x={pixels(childX)}
+			style:--y={pixels(childY)}
+			style:--w={pixels(rect?.width)}
+			style:--h={pixels(rect?.height)}
 		>
 			{@render portal()}
 		</div>
