@@ -62,27 +62,14 @@
 	onpointerup={() => (isPointerDown = false)}
 />
 
-<h1>Boundary</h1>
+<h1>Tether Boundary</h1>
 
 <p>
-	The <code>PortalOverlay</code> component should be part of your +layout.svelte if you want to use any
-	portal functionality. This is because it acts as the default parent of all portals on your page.
-</p>
-
-<p>
-	It also acts as the <b>outer boundary</b> for any <code>Tether</code> components you might use on your
-	page. The outer boundary is responsible for keeping all tethered elements (e.g. tooltips) visible within
-	the viewport.
-</p>
-
-<p>
-	By manually wrapping a <code>TetherBoundary</code> around a region of your page, you re-define the
-	limits of where nested tethered elements can go.
+	By wrapping a <code>TetherBoundary</code> around a region of your page, you re-define the limits of
+	where nested tethered elements (e.g. tooltips) can go.
 </p>
 
 <p><b>Click and drag</b> in the area below to see this in action.</p>
-
-<div class="space"></div>
 
 <div class="outer-boundary" bind:this={outerBoundary} onpointerdown={onPointerDown}>
 	<TetherBoundary>
@@ -106,7 +93,13 @@
 	</TetherBoundary>
 </div>
 
-<div class="space"></div>
+<p>
+	The <code>TetherBoundary</code> component is especially useful at the <b>top level</b> of your page.
+	You can use a tether boundary in your outer most +layout.svelte to ensure that all tooltips and other
+	popovers stay visible within the viewport.
+</p>
+
+{`./ExampleLayout.svelte`}
 
 <style lang="scss">
 	@use '$lib/docs/style/scheme';
@@ -147,9 +140,5 @@
 	span {
 		padding: 0px 4px;
 		outline: 1px solid scheme.color('primary');
-	}
-
-	.space {
-		height: 50em;
 	}
 </style>
