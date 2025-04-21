@@ -48,6 +48,19 @@
 
 {`./DropdownUnstyled.svelte`}
 
+<p>
+	To make it the same width, you can pass the <code>inheritWidth</code> flag to the
+	<code>Tether</code> component. You can also put a <i>soft limit</i> on the maximum width by using
+	the special value
+	<code>inheritWidth="constrain"</code>.
+</p>
+
+<p>
+	For improved usability, a tether can be configured to wrap horizontally and/or vertically. For the
+	dropdown menu below, the <code>wrapVertical</code> flag means that the alignment
+	<b>automatically swaps</b> to the top if there's not enough space below the input field.
+</p>
+
 <h2>Styling</h2>
 
 <p>

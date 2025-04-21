@@ -1,7 +1,7 @@
 <script lang="ts">
 	import ChevronDownIcon from '@lucide/svelte/icons/chevron-down';
 	import { Tether } from 'svelte-snippet-portal';
-	import { fly } from 'svelte/transition';
+	import { fade } from 'svelte/transition';
 
 	interface Props {
 		options: string[];
@@ -44,25 +44,33 @@
 
 <svelte:window onmouseup={expanded ? () => (expanded = false) : undefined} />
 
-<Tether origin="bottom-center" inheritWidth>
-	<div
-		role="combobox"
-		aria-controls={popupId}
-		aria-expanded={expanded}
-		tabindex="0"
-		onclick={() => (expanded = true)}
-		onkeydown={onDropdownKeyDown}
-	>
-		<span>{value}</span>
+<Tether origin="bottom-center" inheritWidth wrapVertical>
+	{#snippet children({ isMirroredVertically })}
+		<div
+			class:wrap-to-top={isMirroredVertically}
+			role="combobox"
+			aria-controls={popupId}
+			aria-expanded={expanded}
+			tabindex="0"
+			onclick={() => (expanded = true)}
+			onkeydown={onDropdownKeyDown}
+		>
+			<span>{value}</span>
 
-		<div class="icon">
-			<ChevronDownIcon />
+			<div class="icon">
+				<ChevronDownIcon />
+			</div>
 		</div>
-	</div>
+	{/snippet}
 
-	{#snippet portal()}
+	{#snippet portal({ isMirroredVertically })}
 		{#if expanded}
-			<ul role="listbox" id={popupId} transition:fly={{ y: -2, duration: 200 }}>
+			<ul
+				class:wrap-to-top={isMirroredVertically}
+				role="listbox"
+				id={popupId}
+				transition:fade={{ duration: 100 }}
+			>
 				{#each options as option}
 					<li
 						role="option"
@@ -109,8 +117,15 @@
 		}
 
 		&[aria-expanded='true'] {
-			border-bottom-left-radius: 0;
-			border-bottom-right-radius: 0;
+			&:not(.wrap-to-top) {
+				border-bottom-left-radius: 0;
+				border-bottom-right-radius: 0;
+			}
+
+			&.wrap-to-top {
+				border-top-left-radius: 0;
+				border-top-right-radius: 0;
+			}
 
 			.icon {
 				rotate: 180deg;
@@ -123,13 +138,21 @@
 		padding-inline-start: 0;
 		pointer-events: all;
 		background: scheme.color('background');
-		box-shadow: 2px 2px 0 #0005;
-		border: 1px solid scheme.color('shade-2');
-		border-top-width: 0;
+		border: 1px solid scheme.color('shade-3');
 		border-radius: 8px;
-		border-top-left-radius: 0;
-		border-top-right-radius: 0;
 		overflow: auto;
+
+		&:not(.wrap-to-top) {
+			border-top-width: 0;
+			border-top-left-radius: 0;
+			border-top-right-radius: 0;
+		}
+
+		&.wrap-to-top {
+			border-bottom-width: 0;
+			border-bottom-left-radius: 0;
+			border-bottom-right-radius: 0;
+		}
 	}
 
 	[role='option'] {
@@ -138,7 +161,7 @@
 		cursor: pointer;
 
 		&:hover {
-			background-color: scheme.color('shade-1');
+			background-color: scheme.color('shade-2');
 		}
 
 		&[aria-selected='true'] {

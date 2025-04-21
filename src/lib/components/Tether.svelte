@@ -1,19 +1,30 @@
 <script lang="ts" module>
 	export type Alignment = keyof typeof ALIGNMENT_MAPPING;
 
+	const TOP = 0;
+	const LEFT = 0;
+	const BOTTOM = 1;
+	const RIGHT = 1;
+	const CENTER = 0.5;
+
 	const ALIGNMENT_MAPPING = {
-		'top-left': [0, 0],
-		'top-center': [0.5, 0],
-		'top-right': [1, 0],
-		'center-left': [0, 0.5],
-		center: [0.5, 0.5],
-		'center-right': [1, 0.5],
-		'bottom-left': [0, 1],
-		'bottom-center': [0.5, 1],
-		'bottom-right': [1, 1]
+		'top-left': [LEFT, TOP],
+		'top-center': [CENTER, TOP],
+		'top-right': [RIGHT, TOP],
+		'center-left': [LEFT, CENTER],
+		center: [CENTER, CENTER],
+		'center-right': [RIGHT, CENTER],
+		'bottom-left': [LEFT, BOTTOM],
+		'bottom-center': [CENTER, BOTTOM],
+		'bottom-right': [RIGHT, BOTTOM]
 	};
 
 	export type SizeInheritMode = boolean | 'constrain';
+
+	export interface MountedTetherInfo {
+		isMirroredHorizontally: boolean;
+		isMirroredVertically: boolean;
+	}
 </script>
 
 <script lang="ts">
@@ -27,8 +38,14 @@
 		direction?: Alignment;
 		inheritWidth?: SizeInheritMode;
 		inheritHeight?: SizeInheritMode;
-		portal: Snippet;
-		children: Snippet;
+
+		/** If enabled, the horizontal alignment of the portal will be mirrored when there's not enough space. */
+		wrapHorizontal?: boolean;
+		/** If enabled, the vertical alignment of the portal will be mirrored when there's not enough space. */
+		wrapVertical?: boolean;
+
+		portal: Snippet<[info: MountedTetherInfo]>;
+		children: Snippet<[info: MountedTetherInfo]>;
 
 		/** The wrapped HTML element used as a reference for positioning the portal (read-only). */
 		wrappedElement?: HTMLElement;
@@ -39,6 +56,8 @@
 		direction = origin,
 		inheritWidth = false,
 		inheritHeight = false,
+		wrapHorizontal = false,
+		wrapVertical = false,
 		portal,
 		children,
 		wrappedElement = $bindable()
@@ -82,8 +101,27 @@
 		!rect ? 0 : rect.y + originVertical * rect.height - childHeight * (1 - alignVertical)
 	);
 
-	let childX = $derived(Math.min(Math.max(childXUnclamped, minX), maxX));
-	let childY = $derived(Math.min(Math.max(childYUnclamped, minY), maxY));
+	let wrapLeftToRight = $derived(alignHorizontal === LEFT && childXUnclamped - minX < 0);
+	let wrapRightToLeft = $derived(alignHorizontal === RIGHT && maxX - childXUnclamped < 0);
+	let wrapTopToBottom = $derived(alignVertical === TOP && childYUnclamped - minY < 0);
+	let wrapBottomToTop = $derived(alignVertical === BOTTOM && maxY - childYUnclamped < 0);
+
+	let applyMirrorHorizontal = $derived(wrapHorizontal && (wrapLeftToRight || wrapRightToLeft));
+	let applyMirrorVertical = $derived(wrapVertical && (wrapBottomToTop || wrapTopToBottom));
+
+	let childXWrappedUnclamped = $derived(
+		!applyMirrorHorizontal || !rect
+			? childXUnclamped
+			: rect.x + (1 - originHorizontal) * rect.width - childWidth * alignHorizontal
+	);
+	let childYWrappedUnclamped = $derived(
+		!applyMirrorVertical || !rect
+			? childYUnclamped
+			: rect.y + (1 - originVertical) * rect.height - childHeight * alignVertical
+	);
+
+	let childX = $derived(Math.min(Math.max(childXWrappedUnclamped, minX), maxX));
+	let childY = $derived(Math.min(Math.max(childYWrappedUnclamped, minY), maxY));
 
 	function findValidElement(parent: HTMLElement) {
 		const children = parent.children;
@@ -124,13 +162,18 @@
 		};
 	});
 
+	let mountedTetherInfo = $derived<MountedTetherInfo>({
+		isMirroredHorizontally: applyMirrorHorizontal,
+		isMirroredVertically: applyMirrorVertical
+	});
+
 	function pixels(amount: number | undefined) {
 		return amount === undefined ? undefined : `${amount}px`;
 	}
 </script>
 
 <div class="tether" bind:this={referenceWrapper}>
-	{@render children()}
+	{@render children(mountedTetherInfo)}
 </div>
 
 {#if referenceWrapper}
@@ -146,7 +189,7 @@
 			style:--w={pixels(rect?.width)}
 			style:--h={pixels(rect?.height)}
 		>
-			{@render portal()}
+			{@render portal(mountedTetherInfo)}
 		</div>
 	</Portal>
 {/if}

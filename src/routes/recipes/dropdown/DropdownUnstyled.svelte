@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { Tether } from 'svelte-snippet-portal';
-	import { fly } from 'svelte/transition';
+	import { fade } from 'svelte/transition';
 
 	interface Props {
 		options: string[];
@@ -43,7 +43,7 @@
 
 <svelte:window onmouseup={expanded ? () => (expanded = false) : undefined} />
 
-<Tether origin="bottom-center" inheritWidth>
+<Tether origin="bottom-center" inheritWidth wrapVertical>
 	<div
 		role="combobox"
 		aria-controls={popupId}
@@ -57,7 +57,7 @@
 
 	{#snippet portal()}
 		{#if expanded}
-			<ul role="listbox" id={popupId} transition:fly={{ y: -2, duration: 200 }}>
+			<ul role="listbox" id={popupId} transition:fade={{ duration: 100 }}>
 				{#each options as option}
 					<li
 						role="option"
@@ -88,7 +88,7 @@
 		background-color: white;
 		color: black;
 		outline: 1px solid black;
-		margin: 0;
+		margin: 0 1px;
 		padding-inline-start: 0;
 		pointer-events: all;
 	}

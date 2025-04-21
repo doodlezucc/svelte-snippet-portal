@@ -7,11 +7,16 @@
 		<Link href="/">Overview</Link>
 
 		<ul>
+			<h3>Advanced Usage</h3>
+			<Link href="/tether-boundary">Tether Boundary</Link>
+			<Link href="/recipes/custom-destination">Custom Destination</Link>
+		</ul>
+
+		<ul>
 			<h3>Recipes</h3>
 			<Link href="/recipes/tooltip">Tooltip</Link>
 			<Link href="/recipes/dialog">Dialog</Link>
 			<Link href="/recipes/dropdown">Dropdown</Link>
-			<Link href="/recipes/custom-destination">Custom Destination</Link>
 		</ul>
 	</ul>
 </aside>

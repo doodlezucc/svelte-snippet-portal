@@ -65,6 +65,7 @@
 		padding: 24px 48px;
 
 		display: flex;
+		align-items: center;
 		gap: 32px;
 
 		background-color: scheme.color('background');
