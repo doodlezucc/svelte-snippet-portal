@@ -18,7 +18,7 @@ const config = {
 		adapter: adapter(),
 
 		alias: {
-			'svelte-snippet-portal': 'src/lib/index.js'
+			'svelte-tether': 'src/lib/index.js'
 		}
 	}
 };

@@ -1,6 +1,6 @@
 <script lang="ts">
 	import type { Snippet } from 'svelte';
-	import { Portal } from 'svelte-snippet-portal';
+	import { Portal } from 'svelte-tether';
 
 	interface Props {
 		open: boolean;

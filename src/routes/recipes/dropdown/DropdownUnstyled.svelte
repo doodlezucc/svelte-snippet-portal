@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { Tether } from 'svelte-snippet-portal';
+	import { Tether } from 'svelte-tether';
 	import { fade } from 'svelte/transition';
 
 	interface Props {

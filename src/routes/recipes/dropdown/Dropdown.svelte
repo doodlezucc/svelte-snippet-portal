@@ -1,6 +1,6 @@
 <script lang="ts">
 	import ChevronDownIcon from '@lucide/svelte/icons/chevron-down';
-	import { Tether } from 'svelte-snippet-portal';
+	import { Tether } from 'svelte-tether';
 	import { fade } from 'svelte/transition';
 
 	interface Props {

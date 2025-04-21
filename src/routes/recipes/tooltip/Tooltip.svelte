@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { type Snippet } from 'svelte';
-	import { Tether, type Alignment } from 'svelte-snippet-portal';
+	import { Tether, type Alignment } from 'svelte-tether';
 
 	interface Props {
 		alignment?: Alignment;

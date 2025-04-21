@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { useAnimationFrame } from '$lib/components/animation-frame.svelte.js';
-	import { Tether, TetherBoundary } from 'svelte-snippet-portal';
+	import { Tether, TetherBoundary } from 'svelte-tether';
 	import { Spring } from 'svelte/motion';
 
 	interface Point {

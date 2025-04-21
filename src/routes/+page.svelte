@@ -5,7 +5,7 @@
 	let direction = $state<Alignment>();
 </script>
 
-<h1>Svelte Snippet Portal</h1>
+<h1>Svelte Tether</h1>
 
 <p>
 	Svelte components to teleport snippets from one place to another. Useful for popovers and modal

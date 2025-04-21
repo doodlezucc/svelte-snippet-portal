@@ -1,6 +1,6 @@
 <script lang="ts">
 	import type { Snippet } from 'svelte';
-	import { PortalOverlay, TetherBoundary } from 'svelte-snippet-portal';
+	import { PortalOverlay, TetherBoundary } from 'svelte-tether';
 
 	let { children }: { children: Snippet } = $props();
 </script>

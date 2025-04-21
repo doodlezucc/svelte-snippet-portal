@@ -1,6 +1,6 @@
 <script lang="ts">
 	import SampleText from '$lib/docs/SampleText.svelte';
-	import { Destination, Portal, type PortalDestination } from 'svelte-snippet-portal';
+	import { Destination, Portal, type PortalDestination } from 'svelte-tether';
 
 	let destinationA = $state<PortalDestination>();
 	let destinationB = $state<PortalDestination>();

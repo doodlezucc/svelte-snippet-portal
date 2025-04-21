@@ -31,7 +31,7 @@
 <header data-theme={theme.value ?? undefined}>
 	<a class="logo" href="/">
 		<SendToBackIcon />
-		Svelte Snippet Portal
+		Svelte Tether
 	</a>
 
 	<div class="expand"></div>
@@ -50,7 +50,7 @@
 	<div class="divider"></div>
 
 	<Tooltip alignment="bottom-center">
-		<a href="https://github.com/doodlezucc/svelte-snippet-portal"><GitHubIcon /></a>
+		<a href="https://github.com/doodlezucc/svelte-tether"><GitHubIcon /></a>
 
 		{#snippet tooltip()}
 			GitHub
