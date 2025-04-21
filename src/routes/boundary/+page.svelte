@@ -82,6 +82,8 @@
 
 <p><b>Click and drag</b> in the area below to see this in action.</p>
 
+<div class="space"></div>
+
 <div class="outer-boundary" bind:this={outerBoundary} onpointerdown={onPointerDown}>
 	<TetherBoundary>
 		<div class="boundary">

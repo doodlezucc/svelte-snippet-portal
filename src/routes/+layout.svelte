@@ -18,29 +18,25 @@
 	let { children }: Props = $props();
 </script>
 
-<PortalOverlay class="global-portal-overlay">
-	<Header />
+<PortalOverlay>
+	<TetherBoundary class="global-layout">
+		<Header />
 
-	<main>
-		<Sidebar />
+		<main>
+			<Sidebar />
 
-		<TetherBoundary class="content-boundary">
 			<Content>
 				{@render children()}
 			</Content>
-		</TetherBoundary>
-	</main>
+		</main>
+	</TetherBoundary>
 </PortalOverlay>
 
 <style lang="scss">
-	:global(.global-portal-overlay) {
+	:global(.global-layout) {
 		display: flex;
 		flex-direction: column;
 		height: 100vh;
-	}
-
-	:global(.content-boundary) {
-		display: flex;
 	}
 
 	main {

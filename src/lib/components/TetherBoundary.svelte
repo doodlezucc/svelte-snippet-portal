@@ -8,7 +8,7 @@
 	}
 
 	export function useTetherBoundary() {
-		return getContext<TetherBoundaryContext>(BOUNDARY_CONTEXT_KEY);
+		return getContext<TetherBoundaryContext | undefined>(BOUNDARY_CONTEXT_KEY);
 	}
 </script>
 

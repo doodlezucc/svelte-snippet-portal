@@ -48,14 +48,14 @@
 
 	let referenceWrapper = $state<HTMLElement>();
 	let rect = $state<DOMRect>();
-	let boundary = $state(<DOMRect>{ top: 0, right: 1, bottom: 1, left: 0 });
+	let boundary = $state<DOMRect>();
 
 	useAnimationFrame(() => {
 		if (wrappedElement) {
 			rect = wrappedElement.getBoundingClientRect();
 		}
 
-		const overlayRect = tetherBoundary.getRect();
+		const overlayRect = tetherBoundary?.getRect();
 		if (overlayRect) {
 			boundary = overlayRect;
 		}
@@ -64,8 +64,10 @@
 	let childWidth = $state(0);
 	let childHeight = $state(0);
 
-	let maxX = $derived(boundary.right - childWidth);
-	let maxY = $derived(boundary.bottom - childHeight);
+	let minX = $derived(!boundary ? Number.NEGATIVE_INFINITY : boundary.left);
+	let minY = $derived(!boundary ? Number.NEGATIVE_INFINITY : boundary.top);
+	let maxX = $derived(!boundary ? Number.POSITIVE_INFINITY : boundary.right - childWidth);
+	let maxY = $derived(!boundary ? Number.POSITIVE_INFINITY : boundary.bottom - childHeight);
 
 	let originHorizontal = $derived(ALIGNMENT_MAPPING[origin][0]);
 	let originVertical = $derived(ALIGNMENT_MAPPING[origin][1]);
@@ -80,8 +82,8 @@
 		!rect ? 0 : rect.y + originVertical * rect.height - childHeight * (1 - alignVertical)
 	);
 
-	let childX = $derived(Math.min(Math.max(childXUnclamped, boundary.left), maxX));
-	let childY = $derived(Math.min(Math.max(childYUnclamped, boundary.top), maxY));
+	let childX = $derived(Math.min(Math.max(childXUnclamped, minX), maxX));
+	let childY = $derived(Math.min(Math.max(childYUnclamped, minY), maxY));
 
 	function findValidElement(parent: HTMLElement) {
 		const children = parent.children;

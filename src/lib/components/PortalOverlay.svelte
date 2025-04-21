@@ -15,9 +15,7 @@
 
 <script lang="ts">
 	import { setContext, type Snippet } from 'svelte';
-	import type { ClassValue } from 'svelte/elements';
 	import Space from './Space.svelte';
-	import TetherBoundary from './TetherBoundary.svelte';
 
 	interface Props {
 		/**
@@ -26,11 +24,10 @@
 		 * @default 10
 		 */
 		zIndex?: number;
-		class?: ClassValue;
 		children: Snippet;
 	}
 
-	let { zIndex = 10, class: classValue, children }: Props = $props();
+	let { zIndex = 10, children }: Props = $props();
 
 	let space = $state<Space>();
 
@@ -47,9 +44,7 @@
 	<Space bind:this={space} />
 </div>
 
-<TetherBoundary class={classValue} ignoreParentBoundary>
-	{@render children()}
-</TetherBoundary>
+{@render children()}
 
 <style>
 	.overlay {
