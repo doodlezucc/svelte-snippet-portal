@@ -123,7 +123,7 @@
 
 	.boundary-header {
 		position: absolute;
-		transform: translateY(-100%);
+		transform: translateY(calc(-100% - 1px));
 	}
 
 	.content {
