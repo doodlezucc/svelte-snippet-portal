@@ -12,7 +12,7 @@
 	A standard <code>Portal</code> may be used to create elements which fill the entire viewport.
 	That's because any content put inside a portal usually gets mounted right into the global
 	<code>PortalOverlay</code> wrapper (if no
-	<a href="/recipes/custom-destination">other destination</a> is specified).
+	<a href="/custom-destination">other destination</a> is specified).
 </p>
 
 <p>

@@ -9,7 +9,7 @@
 		<ul>
 			<h3>Advanced Usage</h3>
 			<Link href="/tether-boundary">Tether Boundary</Link>
-			<Link href="/recipes/custom-destination">Custom Destination</Link>
+			<Link href="/custom-destination">Custom Destination</Link>
 		</ul>
 
 		<ul>
