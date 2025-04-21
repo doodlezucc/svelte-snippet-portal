@@ -4,12 +4,21 @@
 
 	const OVERLAY_CONTEXT_KEY = 'portal-overlay';
 
+	export interface MountedModal {
+		unmount(): void;
+	}
+
 	export interface OverlayContext {
 		space: PortalSpace;
+		mountModal(): MountedModal;
 	}
 
 	export function useOverlay() {
 		return getContext<OverlayContext>(OVERLAY_CONTEXT_KEY);
+	}
+
+	export interface OverlayState {
+		hasModals: boolean;
 	}
 </script>
 
@@ -24,19 +33,34 @@
 		 * @default 10
 		 */
 		zIndex?: number;
-		children: Snippet;
+		children: Snippet<[state: OverlayState]>;
 	}
 
 	let { zIndex = 10, children }: Props = $props();
 
 	let space = $state<Space>();
+	let modals = $state.raw<MountedModal[]>([]);
 
 	setContext<OverlayContext>(OVERLAY_CONTEXT_KEY, {
 		space: {
 			mountPortal(snippet) {
 				return space!.mountPortal(snippet);
 			}
+		},
+		mountModal() {
+			const mountedModal: MountedModal = {
+				unmount() {
+					modals = modals.filter((someModal) => someModal !== mountedModal);
+				}
+			};
+
+			modals = [...modals, mountedModal];
+			return mountedModal;
 		}
+	});
+
+	let overlayState = $derived<OverlayState>({
+		hasModals: modals.length > 0
 	});
 </script>
 
@@ -44,7 +68,7 @@
 	<Space bind:this={space} />
 </div>
 
-{@render children()}
+{@render children(overlayState)}
 
 <style>
 	.overlay {

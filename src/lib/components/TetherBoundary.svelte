@@ -14,16 +14,16 @@
 
 <script lang="ts">
 	import { setContext, type Snippet } from 'svelte';
-	import type { ClassValue } from 'svelte/elements';
+	import type { HTMLAttributes } from 'svelte/elements';
 	import { useAnimationFrame } from './animation-frame.svelte.js';
 
 	interface Props {
 		ignoreParentBoundary?: boolean;
-		class?: ClassValue;
+		attributes?: Omit<HTMLAttributes<HTMLDivElement>, 'children'>;
 		children: Snippet;
 	}
 
-	let { ignoreParentBoundary = false, class: classValue, children }: Props = $props();
+	let { ignoreParentBoundary = false, attributes, children }: Props = $props();
 
 	let wrapper = $state<HTMLElement>();
 	let wrapperRect = $state<DOMRect>();
@@ -56,6 +56,6 @@
 	});
 </script>
 
-<div class={classValue} bind:this={wrapper}>
+<div bind:this={wrapper} {...attributes}>
 	{@render children()}
 </div>

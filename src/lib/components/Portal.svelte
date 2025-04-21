@@ -4,11 +4,12 @@
 	import type { PortalSpace } from './Space.svelte';
 
 	interface Props {
+		modal?: boolean;
 		space?: PortalSpace;
 		children: Snippet;
 	}
 
-	let { space, children }: Props = $props();
+	let { modal = false, space, children }: Props = $props();
 
 	const overlay = useOverlay();
 	let usedSpace = $derived(space ?? overlay.space);
@@ -21,5 +22,15 @@
 		return () => {
 			mountedPortal.unmount();
 		};
+	});
+
+	$effect(() => {
+		if (modal) {
+			const mountedModal = untrack(() => overlay.mountModal());
+
+			return () => {
+				mountedModal.unmount();
+			};
+		}
 	});
 </script>

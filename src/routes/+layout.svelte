@@ -15,21 +15,23 @@
 		children: Snippet;
 	}
 
-	let { children }: Props = $props();
+	let { children: layoutChildren }: Props = $props();
 </script>
 
 <PortalOverlay>
-	<TetherBoundary class="global-layout">
-		<Header />
+	{#snippet children({ hasModals })}
+		<TetherBoundary attributes={{ class: 'global-layout', inert: hasModals }}>
+			<Header />
 
-		<main>
-			<Sidebar />
+			<main>
+				<Sidebar />
 
-			<Content>
-				{@render children()}
-			</Content>
-		</main>
-	</TetherBoundary>
+				<Content>
+					{@render layoutChildren()}
+				</Content>
+			</main>
+		</TetherBoundary>
+	{/snippet}
 </PortalOverlay>
 
 <style lang="scss">
