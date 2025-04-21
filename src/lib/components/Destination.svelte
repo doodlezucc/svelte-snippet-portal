@@ -11,7 +11,7 @@
 		}
 	}
 
-	export interface PortalSpace {
+	export interface PortalDestination {
 		mountPortal(snippet: Snippet): MountedPortal;
 	}
 </script>
