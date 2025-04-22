@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { useAnimationFrame } from '$lib/components/animation-frame.svelte.js';
+	import CodeBlock from '$lib/docs/CodeBlock.svelte';
 	import { Tether, TetherBoundary } from 'svelte-tether';
 	import { Spring } from 'svelte/motion';
 
@@ -99,7 +100,9 @@
 	popovers stay visible within the viewport.
 </p>
 
-{`./ExampleLayout.svelte`}
+<CodeBlock>
+	{`./ExampleLayout.svelte`}
+</CodeBlock>
 
 <style lang="scss">
 	@use '$lib/docs/style/scheme';

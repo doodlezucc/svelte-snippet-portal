@@ -1,4 +1,5 @@
 <script lang="ts">
+	import CodeBlock from '$lib/docs/CodeBlock.svelte';
 	import type { Alignment } from '$lib/index.js';
 	import ExampleTether from './ExampleTether.svelte';
 
@@ -8,11 +9,34 @@
 <h1>Svelte Tether</h1>
 
 <p>
-	Svelte components to teleport snippets from one place to another. Useful for popovers and modal
-	elements.
+	A small collection of Svelte wrapper components to teleport snippets from one place to another.
+	Useful for popovers and modal elements.
 </p>
 
-<h2>{'<Tether>'}</h2>
+<CodeBlock>
+	{`ts
+npm install svelte-tether
+`}
+</CodeBlock>
+
+<p>
+	Get started by wrapping your page in the <code>PortalOverlay</code> component. Usually this would be
+	in your outer most +layout.svelte file.
+</p>
+
+<CodeBlock>
+	{`svelte
+<PortalOverlay>
+	{@render children()}
+</PortalOverlay>
+`}
+</CodeBlock>
+
+<h2>Portals</h2>
+
+<p>Portals take whatever content you put inside and mount it in a <code>Destination</code>.</p>
+
+<h2>Tethers</h2>
 
 <p>
 	Tethers are wrapped around an element and provide a way to mount custom content

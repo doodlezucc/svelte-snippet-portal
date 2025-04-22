@@ -1,4 +1,5 @@
 <script lang="ts">
+	import CodeBlock from '$lib/docs/CodeBlock.svelte';
 	import Figure from '$lib/docs/Figure.svelte';
 	import Dropdown from './Dropdown.svelte';
 	import DropdownUnstyled from './DropdownUnstyled.svelte';
@@ -46,7 +47,9 @@
 	<DropdownUnstyled {options} bind:value />
 </Figure>
 
-{`./DropdownUnstyled.svelte`}
+<CodeBlock>
+	{`./DropdownUnstyled.svelte`}
+</CodeBlock>
 
 <p>
 	To make it the same width, you can pass the <code>inheritWidth</code> flag to the
@@ -78,7 +81,9 @@
 	<Dropdown {options} bind:value />
 </Figure>
 
-{`./Dropdown.svelte`}
+<CodeBlock>
+	{`./Dropdown.svelte`}
+</CodeBlock>
 
 <style lang="scss">
 	@use '$lib/docs/style/scheme';

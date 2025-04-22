@@ -1,5 +1,6 @@
 <script lang="ts">
 	import Button from '$lib/docs/Button.svelte';
+	import CodeBlock from '$lib/docs/CodeBlock.svelte';
 	import Figure from '$lib/docs/Figure.svelte';
 	import Dialog from './Dialog.svelte';
 
@@ -24,7 +25,8 @@
 	To create a simple fullscreen backdrop for a dialog to fit into, consider the following example:
 </p>
 
-{`svelte
+<CodeBlock>
+	{`svelte
 <Portal modal>
 	<div class="backdrop"></div>
 </Portal>
@@ -37,6 +39,7 @@
 	}
 </style>
 `}
+</CodeBlock>
 
 <p>When mounted, this will render as a dark shade over your whole page.</p>
 
@@ -62,13 +65,15 @@
 
 <p>So, instead of nesting your page content the shorthand way...</p>
 
-{`svelte
+<CodeBlock>
+	{`svelte
 <PortalOverlay>
 	<main>
 		<h1>Welcome to my page.</h1>
 	</main>
 </PortalOverlay>
 `}
+</CodeBlock>
 
 <p>
 	...you can use a <code>{'{#snippet children()}'}</code> block instead. You can then access the
@@ -78,7 +83,8 @@
 	</a> if any modals are currently mounted.
 </p>
 
-{`svelte
+<CodeBlock>
+	{`svelte
 <PortalOverlay>
 	{#snippet children({ hasModals })}
 		<main inert={hasModals}>
@@ -87,6 +93,7 @@
 	{/snippet}
 </PortalOverlay>
 `}
+</CodeBlock>
 
 <h2>Full Example</h2>
 
@@ -97,11 +104,13 @@
 
 <Dialog bind:open={isDialogOpen} title="Dialog Title">This is content.</Dialog>
 
-{`svelte
+<CodeBlock>
+	{`svelte
 <Dialog bind:open={isDialogOpen} title="Dialog Title">
 	This is content.
 </Dialog>
 `}
+</CodeBlock>
 
 <Figure>
 	<Button onclick={() => (isDialogOpen = true)}>Open Dialog</Button>
@@ -112,4 +121,6 @@
 	the backdrop, this causes the dialog to close.
 </p>
 
-{`./Dialog.svelte`}
+<CodeBlock>
+	{`./Dialog.svelte`}
+</CodeBlock>

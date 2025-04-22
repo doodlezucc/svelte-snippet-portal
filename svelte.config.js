@@ -53,7 +53,7 @@ export function shikiPreprocess() {
 				s.update(start, end, `{@html \`${shikiHtml}\`}`);
 			}
 
-			const inlineMatches = content.matchAll(/^{`([a-z]+)(.+?)`}/gms);
+			const inlineMatches = content.matchAll(/^\s*{`([a-z]+)(.+?)`}/gms);
 
 			for (const match of inlineMatches) {
 				const [, language, code] = match;
@@ -61,7 +61,7 @@ export function shikiPreprocess() {
 				replace(match, language, code);
 			}
 
-			const fileMatches = content.matchAll(/^{`(\.\S+)`}/gms);
+			const fileMatches = content.matchAll(/^\s*{`(\.\S+)`}/gms);
 			const fileDependencies = [];
 
 			for (const match of fileMatches) {

@@ -6,17 +6,18 @@
 
 	interface Props {
 		icon: typeof IconType;
+		size?: number;
 		tooltipAlignment?: Alignment;
 		onclick: (ev: MouseEvent) => void;
 
 		children: Snippet;
 	}
 
-	let { icon: Icon, tooltipAlignment = 'top-center', onclick, children }: Props = $props();
+	let { icon: Icon, size, tooltipAlignment = 'top-center', onclick, children }: Props = $props();
 </script>
 
 <Tooltip alignment={tooltipAlignment}>
-	<button {onclick}><Icon /></button>
+	<button {onclick}><Icon {size} /></button>
 
 	{#snippet tooltip()}
 		{@render children()}

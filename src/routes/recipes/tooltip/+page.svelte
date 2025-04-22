@@ -1,4 +1,5 @@
 <script lang="ts">
+	import CodeBlock from '$lib/docs/CodeBlock.svelte';
 	import Figure from '$lib/docs/Figure.svelte';
 	import Tooltip from './Tooltip.svelte';
 </script>
@@ -25,7 +26,8 @@
 	</Tooltip>
 </Figure>
 
-{`svelte
+<CodeBlock>
+	{`svelte
 <Tooltip>
 	<b>Hover me to be greeted.</b>
 
@@ -34,6 +36,7 @@
 	{/snippet}
 </Tooltip>
 `}
+</CodeBlock>
 
 <p>
 	When wrapped around an interactable element (e.g. a button), the tooltip shows up when hovering or
@@ -43,7 +46,9 @@
 
 <h2>Source Code for <code>{'Tooltip'}</code></h2>
 
-{`./Tooltip.svelte`}
+<CodeBlock>
+	{`./Tooltip.svelte`}
+</CodeBlock>
 
 <p>
 	There are multiple things to note in the <code>{'Tooltip'}</code> source code.
