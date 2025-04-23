@@ -1,9 +1,16 @@
 <script lang="ts">
 	import CodeBlock from '$lib/docs/CodeBlock.svelte';
-	import type { Alignment } from '$lib/index.js';
-	import ExampleTether from './ExampleTether.svelte';
+	import Figure from '$lib/docs/Figure.svelte';
+	import { Tether, type Alignment } from 'svelte-tether';
+	import Dropdown from './recipes/dropdown/Dropdown.svelte';
+	import TetherAlignmentExample, {
+		ALIGNMENT_EXAMPLE_DEFAULT,
+		ALIGNMENT_EXAMPLE_OPTIONS
+	} from './TetherAlignmentExample.svelte';
 
-	let direction = $state<Alignment>();
+	let alignmentExampleDirection = $state<typeof ALIGNMENT_EXAMPLE_DEFAULT | Alignment>(
+		ALIGNMENT_EXAMPLE_DEFAULT
+	);
 </script>
 
 <h1>Svelte Tether</h1>
@@ -13,54 +20,67 @@
 	Useful for popovers and modal elements.
 </p>
 
-<CodeBlock>
-	{`ts
-npm install svelte-tether
-`}
-</CodeBlock>
+<h2>What are Tethers?</h2>
 
 <p>
-	Get started by wrapping your page in the <code>PortalOverlay</code> component. Usually this would be
-	in your outer most +layout.svelte file.
-</p>
-
-<CodeBlock>
-	{`svelte
-<PortalOverlay>
-	{@render children()}
-</PortalOverlay>
-`}
-</CodeBlock>
-
-<h2>Portals</h2>
-
-<p>Portals take whatever content you put inside and mount it in a <code>Destination</code>.</p>
-
-<h2>Tethers</h2>
-
-<p>
-	Tethers are wrapped around an element and provide a way to mount custom content
+	A <code>Tether</code> component can be wrapped around an element to mount a floating popover
 	<i>in relation</i> to the wrapped element.
 </p>
 
 <p>
-	A <code>Tether</code> component can be aligned with 2 properties named
-	<code class="primary">origin</code>
-	and
-	<code>direction</code>.
+	The tether can then be aligned with 2 properties named <code class="primary">origin</code> and
+	<code>direction</code>. The <i>direction</i> parameter is optional and defaults to the
+	<i>origin</i> alignment.
 </p>
 
-<div class="grid">
-	<ExampleTether {direction} origin="top-left" />
-	<ExampleTether {direction} origin="top-center" />
-	<ExampleTether {direction} origin="top-right" />
-	<ExampleTether {direction} origin="center-left" />
-	<ExampleTether {direction} origin="center" />
-	<ExampleTether {direction} origin="center-right" />
-	<ExampleTether {direction} origin="bottom-left" />
-	<ExampleTether {direction} origin="bottom-center" />
-	<ExampleTether {direction} origin="bottom-right" />
-</div>
+<TetherAlignmentExample selectedOption={alignmentExampleDirection} />
+
+<Figure>
+	<div class="labelled-dropdown">
+		<code><b>direction</b></code>
+		<Dropdown options={ALIGNMENT_EXAMPLE_OPTIONS} bind:value={alignmentExampleDirection} />
+	</div>
+</Figure>
+
+<p>
+	The library is written with <i>Svelte snippets</i> in mind. Basic usage of a tether wrapper looks like
+	this:
+</p>
+
+<CodeBlock>
+	{`svelte
+<Tether origin="top-center">
+	{#snippet portal()}
+		<i>Tether.</i>
+	{/snippet}
+
+	<span>Sample text.</span>
+</Tether>
+`}
+</CodeBlock>
+
+<Figure>
+	<Tether origin="top-center">
+		{#snippet portal()}
+			<i>Tether.</i>
+		{/snippet}
+
+		<span>Sample text.</span>
+	</Tether>
+</Figure>
+
+<h2>Why <code>portal</code>?</h2>
+
+<p>
+	Tethers are based on the frontend concept of <b>portals</b> - that is, ways for a UI element to
+	break out of its hierarchy and instead get attached to a <b>different parent</b> element.
+</p>
+
+<p>
+	You can use the tether-underlying <code>Portal</code> component by itself, which implements this
+	behavior. Any content nested inside a portal gets mounted to a <code>Destination</code> - by
+	default, a destination managed by the global <code>PortalOverlay</code>.
+</p>
 
 <style lang="scss">
 	@use '$lib/docs/style/scheme';
@@ -70,10 +90,9 @@ npm install svelte-tether
 		color: scheme.color('on-primary');
 	}
 
-	.grid {
-		margin: 5em 4em;
-		display: grid;
-		grid-template-columns: 1fr 1fr 1fr;
-		gap: 2em;
+	.labelled-dropdown {
+		display: flex;
+		align-items: center;
+		gap: 8px;
 	}
 </style>

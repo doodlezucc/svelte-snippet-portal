@@ -1,7 +1,6 @@
 <script lang="ts">
 	import ChevronDownIcon from '@lucide/svelte/icons/chevron-down';
 	import { Tether } from 'svelte-tether';
-	import { fade } from 'svelte/transition';
 
 	interface Props {
 		options: string[];
@@ -64,26 +63,24 @@
 	{/snippet}
 
 	{#snippet portal({ isMirroredVertically })}
-		{#if expanded}
-			<ul
-				class:wrap-to-top={isMirroredVertically}
-				role="listbox"
-				id={popupId}
-				transition:fade={{ duration: 100 }}
-			>
-				{#each options as option}
-					<li
-						role="option"
-						aria-selected={value === option}
-						tabindex="0"
-						onmousedown={() => onSelect(option)}
-						onkeydown={(ev) => onOptionKeyDown(option, ev)}
-					>
-						{option}
-					</li>
-				{/each}
-			</ul>
-		{/if}
+		<ul
+			class:wrap-to-top={isMirroredVertically}
+			aria-hidden={!expanded}
+			role="listbox"
+			id={popupId}
+		>
+			{#each options as option}
+				<li
+					role="option"
+					aria-selected={value === option}
+					tabindex="0"
+					onmousedown={() => onSelect(option)}
+					onkeydown={(ev) => onOptionKeyDown(option, ev)}
+				>
+					{option}
+				</li>
+			{/each}
+		</ul>
 	{/snippet}
 </Tether>
 
@@ -140,7 +137,13 @@
 		background: scheme.color('background');
 		border: 1px solid scheme.color('shade-3');
 		border-radius: 8px;
+		max-height: 200px;
 		overflow: auto;
+
+		&[aria-hidden='true'] {
+			pointer-events: none;
+			opacity: 0;
+		}
 
 		&:not(.wrap-to-top) {
 			border-top-width: 0;
