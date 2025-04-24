@@ -1,6 +1,6 @@
 <script lang="ts" module>
 	import { getContext } from 'svelte';
-	import type { PortalDestination } from './Destination.svelte';
+	import type { IDestination } from './Destination.svelte';
 
 	const OVERLAY_CONTEXT_KEY = 'portal-overlay';
 
@@ -9,7 +9,7 @@
 	}
 
 	export interface OverlayContext {
-		destination: PortalDestination;
+		destination: IDestination;
 		mountModal(): MountedModal;
 	}
 

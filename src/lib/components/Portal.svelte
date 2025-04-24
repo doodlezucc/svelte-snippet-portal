@@ -1,11 +1,11 @@
 <script lang="ts">
 	import { untrack, type Snippet } from 'svelte';
-	import type { PortalDestination } from './Destination.svelte';
+	import type { IDestination } from './Destination.svelte';
 	import { useOverlay } from './PortalOverlay.svelte';
 
 	interface Props {
 		modal?: boolean;
-		destination?: PortalDestination;
+		destination?: IDestination;
 		children: Snippet;
 	}
 

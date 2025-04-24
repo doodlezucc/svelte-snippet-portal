@@ -21,7 +21,7 @@
 
 	export type SizeInheritMode = boolean | 'constrain';
 
-	export interface MountedTetherInfo {
+	export interface TetherState {
 		isMirroredHorizontally: boolean;
 		isMirroredVertically: boolean;
 	}
@@ -44,8 +44,8 @@
 		/** If enabled, the vertical alignment of the portal will be mirrored when there's not enough space. */
 		wrapVertical?: boolean;
 
-		portal: Snippet<[info: MountedTetherInfo]>;
-		children: Snippet<[info: MountedTetherInfo]>;
+		portal: Snippet<[state: TetherState]>;
+		children: Snippet<[state: TetherState]>;
 
 		/** The wrapped HTML element used as a reference for positioning the portal (read-only). */
 		wrappedElement?: HTMLElement;
@@ -162,7 +162,7 @@
 		};
 	});
 
-	let mountedTetherInfo = $derived<MountedTetherInfo>({
+	let tetherState = $derived<TetherState>({
 		isMirroredHorizontally: applyMirrorHorizontal,
 		isMirroredVertically: applyMirrorVertical
 	});
@@ -173,7 +173,7 @@
 </script>
 
 <div class="tether" bind:this={referenceWrapper}>
-	{@render children(mountedTetherInfo)}
+	{@render children(tetherState)}
 </div>
 
 {#if referenceWrapper}
@@ -189,7 +189,7 @@
 			style:--w={pixels(rect?.width)}
 			style:--h={pixels(rect?.height)}
 		>
-			{@render portal(mountedTetherInfo)}
+			{@render portal(tetherState)}
 		</div>
 	</Portal>
 {/if}
