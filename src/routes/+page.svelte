@@ -1,5 +1,6 @@
 <script lang="ts">
 	import CodeBlock from '$lib/docs/CodeBlock.svelte';
+	import DisableTetherBoundary from '$lib/docs/DisableTetherBoundary.svelte';
 	import Figure from '$lib/docs/Figure.svelte';
 	import { Tether, type Alignment } from 'svelte-tether';
 	import Dropdown from './recipes/dropdown/Dropdown.svelte';
@@ -33,7 +34,9 @@
 	<i>origin</i> alignment.
 </p>
 
-<TetherAlignmentExample selectedOption={alignmentExampleDirection} />
+<DisableTetherBoundary>
+	<TetherAlignmentExample selectedOption={alignmentExampleDirection} />
+</DisableTetherBoundary>
 
 <Figure>
 	<div class="labelled-dropdown">
@@ -60,13 +63,15 @@
 </CodeBlock>
 
 <Figure>
-	<Tether origin="top-center">
-		{#snippet portal()}
-			<i>Tether.</i>
-		{/snippet}
+	<DisableTetherBoundary>
+		<Tether origin="top-center">
+			{#snippet portal()}
+				<i>Tether.</i>
+			{/snippet}
 
-		<span>Sample text.</span>
-	</Tether>
+			<span>Sample text.</span>
+		</Tether>
+	</DisableTetherBoundary>
 </Figure>
 
 <h2>Why <code>portal</code>?</h2>

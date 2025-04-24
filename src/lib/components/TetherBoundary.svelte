@@ -1,7 +1,8 @@
 <script lang="ts" module>
 	import { getContext } from 'svelte';
 
-	const BOUNDARY_CONTEXT_KEY = 'portal-tether-boundary';
+	// Exported only for use in the documentation pages
+	export const BOUNDARY_CONTEXT_KEY = 'portal-tether-boundary';
 
 	export interface TetherBoundaryContext {
 		getRect: () => DOMRect | undefined;

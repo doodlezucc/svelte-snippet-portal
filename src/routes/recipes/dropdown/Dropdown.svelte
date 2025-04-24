@@ -140,6 +140,8 @@
 		max-height: 200px;
 		overflow: auto;
 
+		transition: 0.1s;
+
 		&[aria-hidden='true'] {
 			pointer-events: none;
 			opacity: 0;
