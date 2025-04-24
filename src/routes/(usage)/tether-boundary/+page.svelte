@@ -1,5 +1,6 @@
 <script lang="ts">
 	import CodeBlock from '$docs/CodeBlock.svelte';
+	import Heading from '$docs/layout/Heading.svelte';
 	import { useAnimationFrame } from '$lib/animation-frame.svelte.js';
 	import { Tether, TetherBoundary } from 'svelte-tether';
 	import { Spring } from 'svelte/motion';
@@ -63,7 +64,7 @@
 	onpointerup={() => (isPointerDown = false)}
 />
 
-<h1>Tether Boundary</h1>
+<Heading title="Tether Boundary" />
 
 <p>
 	By wrapping a <code>TetherBoundary</code> around a region of your page, you re-define the limits of

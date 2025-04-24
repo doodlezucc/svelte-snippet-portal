@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { page } from '$app/state';
+	import Heading from '$docs/layout/Heading.svelte';
 </script>
 
-<h1>{page.status} {page.error!.message}</h1>
+<Heading title="{page.status} {page.error!.message}" />
 <p>sorry :(</p>

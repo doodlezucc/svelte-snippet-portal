@@ -1,10 +1,11 @@
 <script lang="ts">
 	import CodeBlock from '$docs/CodeBlock.svelte';
 	import Figure from '$docs/layout/Figure.svelte';
+	import Heading from '$docs/layout/Heading.svelte';
 	import Tooltip from './Tooltip.svelte';
 </script>
 
-<h1>Tooltip</h1>
+<Heading title="Tooltip" />
 
 <p>
 	Tooltips are essentially just elements positioned by a <code>Tether</code>, with the added trait

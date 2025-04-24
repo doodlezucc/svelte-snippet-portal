@@ -15,6 +15,10 @@
 	);
 </script>
 
+<svelte:head>
+	<title>Svelte Tether</title>
+</svelte:head>
+
 <h1>Svelte Tether</h1>
 
 <p>

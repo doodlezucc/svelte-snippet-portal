@@ -1,9 +1,10 @@
 <script lang="ts">
 	import CodeBlock from '$docs/CodeBlock.svelte';
+	import Heading from '$docs/layout/Heading.svelte';
 	import Link from '$docs/Link.svelte';
 </script>
 
-<h1>Setup</h1>
+<Heading title="Setup" />
 
 <p>Add the library to your Svelte project by installing it with your preferred package manager.</p>
 

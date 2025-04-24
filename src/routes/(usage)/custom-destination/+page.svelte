@@ -2,12 +2,13 @@
 	import Button from '$docs/Button.svelte';
 	import CodeBlock from '$docs/CodeBlock.svelte';
 	import Figure from '$docs/layout/Figure.svelte';
+	import Heading from '$docs/layout/Heading.svelte';
 	import BoundDestination from './BoundDestination.svelte';
 
 	let useDestinationB = $state(false);
 </script>
 
-<h1>Custom Destination</h1>
+<Heading title="Custom Destination" />
 
 <p>
 	The <code>Destination</code> component is used by the <code>PortalOverlay</code> component to mount

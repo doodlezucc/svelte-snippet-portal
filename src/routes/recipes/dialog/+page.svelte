@@ -2,13 +2,14 @@
 	import Button from '$docs/Button.svelte';
 	import CodeBlock from '$docs/CodeBlock.svelte';
 	import Figure from '$docs/layout/Figure.svelte';
+	import Heading from '$docs/layout/Heading.svelte';
 	import Link from '$docs/Link.svelte';
 	import Dialog from './Dialog.svelte';
 
 	let isDialogOpen = $state(false);
 </script>
 
-<h1>Dialog</h1>
+<Heading title="Dialog" />
 
 <p>
 	A standard <code>Portal</code> may be used to create elements which fill the entire viewport.

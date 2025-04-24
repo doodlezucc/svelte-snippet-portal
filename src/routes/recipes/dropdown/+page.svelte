@@ -1,6 +1,7 @@
 <script lang="ts">
 	import CodeBlock from '$docs/CodeBlock.svelte';
 	import Figure from '$docs/layout/Figure.svelte';
+	import Heading from '$docs/layout/Heading.svelte';
 	import Dropdown from './Dropdown.svelte';
 	import DropdownUnstyled from './DropdownUnstyled.svelte';
 
@@ -8,7 +9,7 @@
 	let value = $state('Lorem');
 </script>
 
-<h1>Dropdown</h1>
+<Heading title="Dropdown" />
 
 <p>A dropdown menu is usually presented to the user when interacting with a combo box:</p>
 
