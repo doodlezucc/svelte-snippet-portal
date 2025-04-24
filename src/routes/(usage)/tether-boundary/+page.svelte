@@ -1,6 +1,6 @@
 <script lang="ts">
 	import CodeBlock from '$docs/CodeBlock.svelte';
-	import { useAnimationFrame } from '$lib/components/animation-frame.svelte.js';
+	import { useAnimationFrame } from '$lib/animation-frame.svelte.js';
 	import { Tether, TetherBoundary } from 'svelte-tether';
 	import { Spring } from 'svelte/motion';
 

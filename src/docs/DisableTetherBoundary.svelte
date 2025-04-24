@@ -7,10 +7,7 @@
 </script>
 
 <script lang="ts">
-	import {
-		BOUNDARY_CONTEXT_KEY,
-		type TetherBoundaryContext
-	} from '$lib/components/TetherBoundary.svelte';
+	import { BOUNDARY_CONTEXT_KEY, type TetherBoundaryContext } from '$lib/TetherBoundary.svelte';
 	import { setContext, type Snippet } from 'svelte';
 
 	interface Props {

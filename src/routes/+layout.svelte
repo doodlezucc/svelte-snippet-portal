@@ -7,9 +7,8 @@
 	import Content from '$docs/Content.svelte';
 	import Header from '$docs/Header.svelte';
 	import Sidebar from '$docs/Sidebar.svelte';
-	import PortalOverlay from '$lib/components/PortalOverlay.svelte';
-	import TetherBoundary from '$lib/components/TetherBoundary.svelte';
 	import type { Snippet } from 'svelte';
+	import { PortalOverlay, TetherBoundary } from 'svelte-tether';
 
 	interface Props {
 		children: Snippet;
