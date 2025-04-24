@@ -15,7 +15,7 @@
 <li><a {href} class:current={isCurrentPage}>{@render children()}</a></li>
 
 <style lang="scss">
-	@use '$lib/docs/style/scheme';
+	@use '$docs/style/scheme';
 
 	li {
 		list-style: none;

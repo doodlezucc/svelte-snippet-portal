@@ -1,6 +1,6 @@
 <script lang="ts">
+	import CodeBlock from '$docs/CodeBlock.svelte';
 	import { useAnimationFrame } from '$lib/components/animation-frame.svelte.js';
-	import CodeBlock from '$lib/docs/CodeBlock.svelte';
 	import { Tether, TetherBoundary } from 'svelte-tether';
 	import { Spring } from 'svelte/motion';
 
@@ -105,7 +105,7 @@
 </CodeBlock>
 
 <style lang="scss">
-	@use '$lib/docs/style/scheme';
+	@use '$docs/style/scheme';
 
 	.outer-boundary {
 		outline: 1px solid scheme.color('text');

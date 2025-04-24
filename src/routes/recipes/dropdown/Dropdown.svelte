@@ -85,7 +85,7 @@
 </Tether>
 
 <style lang="scss">
-	@use '$lib/docs/style/scheme';
+	@use '$docs/style/scheme';
 
 	[role='combobox'] {
 		border: 1px solid scheme.color('shade-3');

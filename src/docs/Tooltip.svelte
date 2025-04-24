@@ -51,7 +51,7 @@
 </svelte:head>
 
 <style lang="scss">
-	@use '$lib/docs/style/scheme';
+	@use '$docs/style/scheme';
 
 	[role='tooltip'] {
 		padding: 4px 12px;

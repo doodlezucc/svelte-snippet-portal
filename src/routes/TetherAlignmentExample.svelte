@@ -43,7 +43,7 @@
 </div>
 
 <style lang="scss">
-	@use '$lib/docs/style/scheme';
+	@use '$docs/style/scheme';
 
 	.grid {
 		margin: 5em 4em;

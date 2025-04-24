@@ -1,7 +1,7 @@
 <script lang="ts">
-	import Button from '$lib/docs/Button.svelte';
-	import CodeBlock from '$lib/docs/CodeBlock.svelte';
-	import Figure from '$lib/docs/Figure.svelte';
+	import Button from '$docs/Button.svelte';
+	import CodeBlock from '$docs/CodeBlock.svelte';
+	import Figure from '$docs/Figure.svelte';
 	import Dialog from './Dialog.svelte';
 
 	let isDialogOpen = $state(false);

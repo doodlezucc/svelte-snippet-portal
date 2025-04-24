@@ -59,7 +59,7 @@
 </header>
 
 <style lang="scss">
-	@use '$lib/docs/style/scheme';
+	@use '$docs/style/scheme';
 
 	header {
 		padding: 24px 48px;

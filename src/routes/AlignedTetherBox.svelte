@@ -26,7 +26,7 @@
 </Tether>
 
 <style lang="scss">
-	@use '$lib/docs/style/scheme';
+	@use '$docs/style/scheme';
 
 	div {
 		text-align: center;

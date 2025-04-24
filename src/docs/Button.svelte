@@ -14,7 +14,7 @@
 </button>
 
 <style lang="scss">
-	@use '$lib/docs/style/scheme';
+	@use '$docs/style/scheme';
 
 	button {
 		appearance: none;

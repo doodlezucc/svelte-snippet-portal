@@ -31,7 +31,7 @@
 </div>
 
 <style lang="scss">
-	@use '$lib/docs/style/scheme';
+	@use '$docs/style/scheme';
 
 	.container {
 		width: 100%;

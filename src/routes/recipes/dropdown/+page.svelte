@@ -1,6 +1,6 @@
 <script lang="ts">
-	import CodeBlock from '$lib/docs/CodeBlock.svelte';
-	import Figure from '$lib/docs/Figure.svelte';
+	import CodeBlock from '$docs/CodeBlock.svelte';
+	import Figure from '$docs/Figure.svelte';
 	import Dropdown from './Dropdown.svelte';
 	import DropdownUnstyled from './DropdownUnstyled.svelte';
 
@@ -86,7 +86,7 @@
 </CodeBlock>
 
 <style lang="scss">
-	@use '$lib/docs/style/scheme';
+	@use '$docs/style/scheme';
 
 	q {
 		display: block;

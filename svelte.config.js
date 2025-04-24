@@ -18,7 +18,8 @@ const config = {
 		adapter: adapter(),
 
 		alias: {
-			'svelte-tether': 'src/lib/index.js'
+			'svelte-tether': 'src/lib/index.js',
+			$docs: 'src/docs'
 		}
 	}
 };

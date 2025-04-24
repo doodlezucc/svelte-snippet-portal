@@ -23,7 +23,7 @@
 </aside>
 
 <style lang="scss">
-	@use '$lib/docs/style/scheme';
+	@use '$docs/style/scheme';
 
 	aside {
 		box-sizing: border-box;

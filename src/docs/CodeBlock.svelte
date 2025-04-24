@@ -40,7 +40,7 @@
 </div>
 
 <style lang="scss">
-	@use '$lib/docs/style/scheme';
+	@use '$docs/style/scheme';
 
 	.wrapper {
 		position: relative;

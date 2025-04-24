@@ -1,7 +1,7 @@
 <script lang="ts">
-	import CodeBlock from '$lib/docs/CodeBlock.svelte';
-	import DisableTetherBoundary from '$lib/docs/DisableTetherBoundary.svelte';
-	import Figure from '$lib/docs/Figure.svelte';
+	import CodeBlock from '$docs/CodeBlock.svelte';
+	import DisableTetherBoundary from '$docs/DisableTetherBoundary.svelte';
+	import Figure from '$docs/Figure.svelte';
 	import { Tether, type Alignment } from 'svelte-tether';
 	import Dropdown from './recipes/dropdown/Dropdown.svelte';
 	import TetherAlignmentExample, {
@@ -103,7 +103,7 @@
 </p>
 
 <style lang="scss">
-	@use '$lib/docs/style/scheme';
+	@use '$docs/style/scheme';
 
 	.primary {
 		background-color: scheme.color('primary');

@@ -1,5 +1,5 @@
 <script lang="ts">
-	import CodeBlock from '$lib/docs/CodeBlock.svelte';
+	import CodeBlock from '$docs/CodeBlock.svelte';
 </script>
 
 <h1>Setup</h1>
