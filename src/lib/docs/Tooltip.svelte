@@ -38,6 +38,7 @@
 </Tether>
 
 <svelte:head>
+	<!-- eslint-disable-next-line svelte/no-at-html-tags -->
 	{@html `<style>
         body:has(
             [aria-labelledby='${tooltipId}']:hover,

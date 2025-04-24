@@ -58,7 +58,7 @@
 	{#snippet portal()}
 		{#if expanded}
 			<ul role="listbox" id={popupId} transition:fade={{ duration: 100 }}>
-				{#each options as option}
+				{#each options as option (option)}
 					<li
 						role="option"
 						aria-selected={value === option}

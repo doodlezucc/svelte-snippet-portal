@@ -69,7 +69,7 @@
 			role="listbox"
 			id={popupId}
 		>
-			{#each options as option}
+			{#each options as option (option)}
 				<li
 					role="option"
 					aria-selected={value === option}
