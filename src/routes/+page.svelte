@@ -90,7 +90,7 @@
 <CodeBlock>
 	{`svelte
 <Portal>
-	This is a rendered as a child of the overlay.
+	This is rendered as a child of the overlay.
 </Portal>
 `}
 </CodeBlock>
