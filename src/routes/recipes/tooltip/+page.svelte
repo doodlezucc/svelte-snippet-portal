@@ -1,6 +1,6 @@
 <script lang="ts">
 	import CodeBlock from '$docs/CodeBlock.svelte';
-	import Figure from '$docs/Figure.svelte';
+	import Figure from '$docs/layout/Figure.svelte';
 	import Tooltip from './Tooltip.svelte';
 </script>
 

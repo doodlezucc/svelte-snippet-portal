@@ -1,7 +1,7 @@
 <script lang="ts">
 	import Button from '$docs/Button.svelte';
 	import CodeBlock from '$docs/CodeBlock.svelte';
-	import Figure from '$docs/Figure.svelte';
+	import Figure from '$docs/layout/Figure.svelte';
 	import BoundDestination from './BoundDestination.svelte';
 
 	let useDestinationB = $state(false);

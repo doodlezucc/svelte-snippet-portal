@@ -5,9 +5,9 @@
 	import SendToBackIcon from '@lucide/svelte/icons/send-to-back';
 	import SunIcon from '@lucide/svelte/icons/sun';
 	import { onMount } from 'svelte';
-	import IconButton from './IconButton.svelte';
-	import Tooltip from './Tooltip.svelte';
-	import { persisted } from './persisted-state.svelte.js';
+	import IconButton from '../IconButton.svelte';
+	import Tooltip from '../Tooltip.svelte';
+	import { persisted } from '../persisted-state.svelte.js';
 
 	type Theme = 'light' | 'dark';
 	const theme = persisted<Theme | null>('dark-mode', null);

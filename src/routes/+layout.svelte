@@ -4,9 +4,9 @@
 	import '@fontsource-variable/roboto-mono';
 	import '@fontsource/merriweather';
 
-	import Content from '$docs/Content.svelte';
-	import Header from '$docs/Header.svelte';
-	import Sidebar from '$docs/Sidebar.svelte';
+	import Content from '$docs/layout/Content.svelte';
+	import Header from '$docs/layout/Header.svelte';
+	import Sidebar from '$docs/layout/Sidebar.svelte';
 	import type { Snippet } from 'svelte';
 	import { PortalOverlay, TetherBoundary } from 'svelte-tether';
 

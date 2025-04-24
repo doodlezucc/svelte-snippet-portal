@@ -1,6 +1,6 @@
 <script lang="ts">
 	import CodeBlock from '$docs/CodeBlock.svelte';
-	import Figure from '$docs/Figure.svelte';
+	import Figure from '$docs/layout/Figure.svelte';
 	import Dropdown from './Dropdown.svelte';
 	import DropdownUnstyled from './DropdownUnstyled.svelte';
 
