@@ -12,7 +12,7 @@
 	let { children }: Props = $props();
 
 	let wrapper = $state<HTMLElement>();
-	let textContent = $derived(wrapper?.textContent ?? '');
+	let textContent = $derived(wrapper?.textContent?.trim() ?? '');
 
 	let showCopiedHint = $state(false);
 
