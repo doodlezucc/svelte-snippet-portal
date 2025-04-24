@@ -5,6 +5,7 @@
 <aside>
 	<ul>
 		<Link href="/">Overview</Link>
+		<Link href="/setup">Setup</Link>
 
 		<ul>
 			<h3>Advanced Usage</h3>

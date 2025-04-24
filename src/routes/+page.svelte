@@ -40,7 +40,7 @@
 
 <Figure>
 	<div class="labelled-dropdown">
-		<code><b>direction</b></code>
+		<span>Value for <code><b>direction</b></code></span>
 		<Dropdown options={ALIGNMENT_EXAMPLE_OPTIONS} bind:value={alignmentExampleDirection} />
 	</div>
 </Figure>
@@ -85,6 +85,21 @@
 	You can use the tether-underlying <code>Portal</code> component by itself, which implements this
 	behavior. Any content nested inside a portal gets mounted to a <code>Destination</code> - by
 	default, a destination managed by the global <code>PortalOverlay</code>.
+</p>
+
+<CodeBlock>
+	{`svelte
+<Portal>
+	This is a rendered as a child of the overlay.
+</Portal>
+`}
+</CodeBlock>
+
+<p>
+	A use case for this can be seen in the recipe for <a href="/recipes/dialog">creating a dialog</a>.
+	Portals don't need to be linked to the global overlay though, and can also be used for
+	<a href="/custom-destination">simply re-parenting elements</a> to a specific location in your Svelte
+	component.
 </p>
 
 <style lang="scss">

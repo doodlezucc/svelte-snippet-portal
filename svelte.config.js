@@ -28,7 +28,7 @@ const config = {
  */
 export function shikiPreprocess() {
 	const shikiPromise = createHighlighter({
-		langs: ['ts', 'svelte'],
+		langs: ['ts', 'svelte', 'shell'],
 		themes: ['github-light', 'dark-plus']
 	});
 
