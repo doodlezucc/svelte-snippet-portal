@@ -2,6 +2,7 @@
 	import Button from '$docs/Button.svelte';
 	import CodeBlock from '$docs/CodeBlock.svelte';
 	import Figure from '$docs/Figure.svelte';
+	import Link from '$docs/Link.svelte';
 	import Dialog from './Dialog.svelte';
 
 	let isDialogOpen = $state(false);
@@ -13,7 +14,7 @@
 	A standard <code>Portal</code> may be used to create elements which fill the entire viewport.
 	That's because any content put inside a portal usually gets mounted right into the global
 	<code>PortalOverlay</code> wrapper (if no
-	<a href="/custom-destination">other destination</a> is specified).
+	<Link path="/custom-destination">other destination</Link> is specified).
 </p>
 
 <p>

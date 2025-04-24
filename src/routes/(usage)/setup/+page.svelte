@@ -1,5 +1,6 @@
 <script lang="ts">
 	import CodeBlock from '$docs/CodeBlock.svelte';
+	import Link from '$docs/Link.svelte';
 </script>
 
 <h1>Setup</h1>
@@ -32,6 +33,6 @@ npm install svelte-tether
 </p>
 
 <p>
-	Consider also putting a <a href="/tether-boundary">tether boundary</a> around the contents of your
-	page if you want all floating elements to be constrained to the viewport.
+	Consider also putting a <Link path="/tether-boundary">tether boundary</Link> around the contents of
+	your page if you want all floating elements to be constrained to the viewport.
 </p>

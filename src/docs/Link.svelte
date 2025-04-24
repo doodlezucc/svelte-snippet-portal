@@ -1,31 +1,13 @@
 <script lang="ts">
-	import { page } from '$app/state';
+	import { base } from '$app/paths';
 	import type { Snippet } from 'svelte';
 
 	interface Props {
-		href: string;
+		path: string;
 		children: Snippet;
 	}
 
-	let { href, children }: Props = $props();
-
-	let isCurrentPage = $derived(href === page.url.pathname);
+	let { path, children }: Props = $props();
 </script>
 
-<li><a {href} class:current={isCurrentPage}>{@render children()}</a></li>
-
-<style lang="scss">
-	@use '$docs/style/scheme';
-
-	li {
-		list-style: none;
-	}
-
-	a {
-		color: scheme.color('text');
-	}
-
-	.current {
-		color: scheme.color('primary');
-	}
-</style>
+<a href="{base}{path}">{@render children()}</a>

@@ -2,6 +2,7 @@
 	import CodeBlock from '$docs/CodeBlock.svelte';
 	import DisableTetherBoundary from '$docs/DisableTetherBoundary.svelte';
 	import Figure from '$docs/Figure.svelte';
+	import Link from '$docs/Link.svelte';
 	import { Tether, type Alignment } from 'svelte-tether';
 	import Dropdown from './recipes/dropdown/Dropdown.svelte';
 	import TetherAlignmentExample, {
@@ -96,10 +97,11 @@
 </CodeBlock>
 
 <p>
-	A use case for this can be seen in the recipe for <a href="/recipes/dialog">creating a dialog</a>.
-	Portals don't need to be linked to the global overlay though, and can also be used for
-	<a href="/custom-destination">simply re-parenting elements</a> to a specific location in your Svelte
-	component.
+	A use case for this can be seen in the recipe for
+	<Link path="/recipes/dialog">creating a dialog</Link>. Portals don't need to be linked to the
+	global overlay though, and can also be used for
+	<Link path="/custom-destination">simply re-parenting elements</Link> to a specific location in your
+	Svelte component.
 </p>
 
 <style lang="scss">

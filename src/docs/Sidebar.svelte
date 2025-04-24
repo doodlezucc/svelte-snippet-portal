@@ -1,23 +1,23 @@
 <script lang="ts">
-	import Link from './Link.svelte';
+	import SidebarLink from './SidebarLink.svelte';
 </script>
 
 <aside>
 	<ul>
-		<Link href="/">Overview</Link>
-		<Link href="/setup">Setup</Link>
+		<SidebarLink path="/">Overview</SidebarLink>
+		<SidebarLink path="/setup">Setup</SidebarLink>
 
 		<ul>
 			<h3>Advanced Usage</h3>
-			<Link href="/tether-boundary">Tether Boundary</Link>
-			<Link href="/custom-destination">Custom Destination</Link>
+			<SidebarLink path="/tether-boundary">Tether Boundary</SidebarLink>
+			<SidebarLink path="/custom-destination">Custom Destination</SidebarLink>
 		</ul>
 
 		<ul>
 			<h3>Recipes</h3>
-			<Link href="/recipes/tooltip">Tooltip</Link>
-			<Link href="/recipes/dialog">Dialog</Link>
-			<Link href="/recipes/dropdown">Dropdown</Link>
+			<SidebarLink path="/recipes/tooltip">Tooltip</SidebarLink>
+			<SidebarLink path="/recipes/dialog">Dialog</SidebarLink>
+			<SidebarLink path="/recipes/dropdown">Dropdown</SidebarLink>
 		</ul>
 	</ul>
 </aside>
