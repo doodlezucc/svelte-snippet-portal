@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { page } from '$app/state';
 	import type { Snippet } from 'svelte';
 
 	interface Props {
@@ -6,9 +7,24 @@
 	}
 
 	let { children }: Props = $props();
+
+	let container = $state<HTMLElement>();
+
+	function resetScroll() {
+		container!.scrollTop = 0;
+	}
+
+	let pagePath = $derived(page.url.pathname);
+
+	$effect(() => {
+		// Scroll to top when navigating to a new documentation page
+		if (pagePath) {
+			resetScroll();
+		}
+	});
 </script>
 
-<div class="container">
+<div class="container" bind:this={container}>
 	<div class="content">
 		{@render children()}
 	</div>
