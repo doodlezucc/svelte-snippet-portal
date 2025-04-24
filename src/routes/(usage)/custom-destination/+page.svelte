@@ -1,9 +1,10 @@
 <script lang="ts">
-	import SampleText from '$lib/docs/SampleText.svelte';
-	import { Destination, Portal, type PortalDestination } from 'svelte-tether';
+	import Button from '$lib/docs/Button.svelte';
+	import CodeBlock from '$lib/docs/CodeBlock.svelte';
+	import Figure from '$lib/docs/Figure.svelte';
+	import BoundDestination from './BoundDestination.svelte';
 
-	let destinationA = $state<PortalDestination>();
-	let destinationB = $state<PortalDestination>();
+	let useDestinationB = $state(false);
 </script>
 
 <h1>Custom Destination</h1>
@@ -18,37 +19,22 @@
 	<code>bind:this</code>) to act as a destination for your portals.
 </p>
 
-<h2>Example</h2>
+<p>
+	For example, the following outlined rectangles are plain <code>div</code> elements, each with a
+	bound <code>Destination</code> component placed inside.
+</p>
 
-<div class="example">
-	<p>
-		These outlined rectangles are <code>div</code> elements, each with a bound
-		<code>Destination</code> component placed inside:
-	</p>
+<BoundDestination {useDestinationB} />
 
-	<div class="destinations">
-		<div class="custom-destination">
-			<Destination bind:this={destinationA} />
-		</div>
-		<div class="custom-destination">
-			<Destination bind:this={destinationB} />
-		</div>
-	</div>
+<Figure>
+	<Button onclick={() => (useDestinationB = !useDestinationB)}>Switch Destination</Button>
+</Figure>
 
-	<Portal destination={destinationB}>
-		<SampleText />
-	</Portal>
-</div>
+<p>
+	By clicking the button, a portal (containg just a text span) switches its mounting destination
+	from one <code>div</code> to another.
+</p>
 
-<style>
-	.destinations {
-		display: grid;
-		grid-template-columns: 1fr 1fr;
-		gap: 32px;
-	}
-
-	.custom-destination {
-		min-height: 40px;
-		outline: 1px solid black;
-	}
-</style>
+<CodeBlock>
+	{`./BoundDestination.svelte`}
+</CodeBlock>
