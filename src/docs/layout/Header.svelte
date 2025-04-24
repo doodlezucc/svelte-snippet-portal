@@ -23,6 +23,8 @@
 		const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
 		mediaQuery.addEventListener('change', onMediaQueryChange);
 
+		prefersDarkMode = mediaQuery.matches;
+
 		return () => {
 			mediaQuery.removeEventListener('change', onMediaQueryChange);
 		};
