@@ -45,4 +45,15 @@
 		padding-bottom: 2em;
 		margin-bottom: 2em;
 	}
+
+	@media screen and (max-width: 1200px) {
+		.container {
+			padding: 2em 2em;
+		}
+
+		.content {
+			margin-left: auto;
+			margin-right: auto;
+		}
+	}
 </style>

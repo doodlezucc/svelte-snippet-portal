@@ -1,8 +1,30 @@
 <script lang="ts">
+	import { page } from '$app/state';
+	import IconButton from '$docs/IconButton.svelte';
+	import MenuIcon from '@lucide/svelte/icons/menu';
+	import XIcon from '@lucide/svelte/icons/x';
 	import SidebarLink from './SidebarLink.svelte';
+
+	let isNavigationOpen = $state(false);
+
+	let currentPath = $derived(page.url.pathname);
+
+	$effect(() => {
+		if (currentPath) {
+			isNavigationOpen = false;
+		}
+	});
 </script>
 
-<aside>
+<div class="small-screen button">
+	<IconButton
+		icon={MenuIcon}
+		tooltipAlignment="center-left"
+		onclick={() => (isNavigationOpen = true)}>Navigation</IconButton
+	>
+</div>
+
+<aside class:open={isNavigationOpen}>
 	<ul>
 		<SidebarLink path="/">Overview</SidebarLink>
 		<SidebarLink path="/setup">Setup</SidebarLink>
@@ -20,10 +42,26 @@
 			<SidebarLink path="/recipes/dropdown">Dropdown</SidebarLink>
 		</ul>
 	</ul>
+
+	<div class="small-screen button">
+		<IconButton
+			icon={XIcon}
+			tooltipAlignment="center-left"
+			onclick={() => (isNavigationOpen = false)}>Close</IconButton
+		>
+	</div>
 </aside>
 
 <style lang="scss">
 	@use '$docs/style/scheme';
+
+	.button {
+		z-index: 1;
+		display: flex;
+		position: absolute;
+		margin: 32px;
+		right: 0;
+	}
 
 	aside {
 		box-sizing: border-box;
@@ -36,6 +74,29 @@
 		line-height: 1.5em;
 		min-width: 240px;
 		width: calc(50vw - 300px);
+	}
+
+	@media screen and (min-width: 1201px) {
+		.small-screen {
+			display: none;
+		}
+	}
+
+	@media screen and (max-width: 1200px) {
+		aside {
+			position: absolute;
+			z-index: 1;
+			width: 100vw;
+			max-height: 100%;
+			overflow: auto;
+			justify-content: start;
+			border: none;
+			border-bottom: 1px solid scheme.color('separator');
+
+			&:not(.open) {
+				display: none;
+			}
+		}
 	}
 
 	ul {
