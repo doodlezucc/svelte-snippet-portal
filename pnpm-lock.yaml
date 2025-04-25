@@ -7,7 +7,13 @@ settings:
 importers:
 
   .:
-    dependencies:
+    devDependencies:
+      '@eslint/compat':
+        specifier: ^1.2.5
+        version: 1.2.8(eslint@9.24.0)
+      '@eslint/js':
+        specifier: ^9.18.0
+        version: 9.24.0
       '@fontsource-variable/montserrat':
         specifier: ^5.2.5
         version: 5.2.5
@@ -23,19 +29,6 @@ importers:
       '@sveltejs/adapter-static':
         specifier: ^3.0.8
         version: 3.0.8(@sveltejs/kit@2.20.5(@sveltejs/vite-plugin-svelte@5.0.3(svelte@5.26.2)(vite@6.2.6(sass-embedded@1.86.3)))(svelte@5.26.2)(vite@6.2.6(sass-embedded@1.86.3)))
-      magic-string:
-        specifier: ^0.30.17
-        version: 0.30.17
-      shiki:
-        specifier: ^3.2.2
-        version: 3.2.2
-    devDependencies:
-      '@eslint/compat':
-        specifier: ^1.2.5
-        version: 1.2.8(eslint@9.24.0)
-      '@eslint/js':
-        specifier: ^9.18.0
-        version: 9.24.0
       '@sveltejs/kit':
         specifier: ^2.16.0
         version: 2.20.5(@sveltejs/vite-plugin-svelte@5.0.3(svelte@5.26.2)(vite@6.2.6(sass-embedded@1.86.3)))(svelte@5.26.2)(vite@6.2.6(sass-embedded@1.86.3))
@@ -66,6 +59,9 @@ importers:
       jsdom:
         specifier: ^26.0.0
         version: 26.1.0
+      magic-string:
+        specifier: ^0.30.17
+        version: 0.30.17
       prettier:
         specifier: ^3.4.2
         version: 3.5.3
@@ -78,6 +74,9 @@ importers:
       sass-embedded:
         specifier: ^1.86.3
         version: 1.86.3
+      shiki:
+        specifier: ^3.2.2
+        version: 3.2.2
       svelte:
         specifier: ^5.0.0
         version: 5.26.2
