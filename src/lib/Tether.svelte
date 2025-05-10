@@ -33,7 +33,7 @@
 	import Portal from './Portal.svelte';
 	import { useTetherBoundary } from './TetherBoundary.svelte';
 
-	interface Props {
+	export interface TetherProps {
 		origin: Alignment;
 		direction?: Alignment;
 		inheritWidth?: SizeInheritMode;
@@ -61,7 +61,7 @@
 		portal,
 		children,
 		wrappedElement = $bindable()
-	}: Props = $props();
+	}: TetherProps = $props();
 
 	const tetherBoundary = useTetherBoundary();
 

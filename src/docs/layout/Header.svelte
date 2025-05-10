@@ -55,7 +55,7 @@
 	<Tooltip alignment="bottom-center">
 		<a href="https://github.com/doodlezucc/svelte-tether"><GitHubIcon /></a>
 
-		{#snippet tooltip()}
+		{#snippet title()}
 			GitHub
 		{/snippet}
 	</Tooltip>

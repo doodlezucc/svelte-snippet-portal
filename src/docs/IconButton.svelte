@@ -19,7 +19,7 @@
 <Tooltip alignment={tooltipAlignment}>
 	<button {onclick}><Icon {size} /></button>
 
-	{#snippet tooltip()}
+	{#snippet title()}
 		{@render children()}
 	{/snippet}
 </Tooltip>
