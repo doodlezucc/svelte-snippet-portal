@@ -167,9 +167,13 @@
 		isMirroredVertically: applyMirrorVertical
 	});
 
-	function pixels(amount: number | undefined) {
-		return amount === undefined ? undefined : `${amount}px`;
-	}
+	let style = $derived.by(() => {
+		if (!rect) {
+			return `--x: ${childX}px; --y: ${childY}px`;
+		} else {
+			return `--x: ${childX}px; --y: ${childY}px; --w: ${rect.width}px; --h: ${rect.height}px`;
+		}
+	});
 </script>
 
 <div class="tether" bind:this={referenceWrapper}>
@@ -184,10 +188,7 @@
 			data-inherit-height={inheritHeight || undefined}
 			bind:clientWidth={childWidth}
 			bind:clientHeight={childHeight}
-			style:--x={pixels(childX)}
-			style:--y={pixels(childY)}
-			style:--w={pixels(rect?.width)}
-			style:--h={pixels(rect?.height)}
+			{style}
 		>
 			{@render portal(tetherState)}
 		</div>

@@ -1,20 +1,29 @@
 import { onMount } from 'svelte';
 
-export function useAnimationFrame(onTick: () => void) {
-	let animationFrameRequest = $state<number>();
+type TickListener = () => void;
 
-	function tick() {
-		animationFrameRequest = requestAnimationFrame(tick);
-		onTick();
+const listeners = new Set<TickListener>();
+
+let animationFrameRequest: number | undefined = undefined;
+
+function tick() {
+	animationFrameRequest = requestAnimationFrame(tick);
+	for (const callback of listeners) {
+		callback();
 	}
+}
 
+export function useAnimationFrame(onTick: () => void) {
 	onMount(() => {
-		tick();
+		onTick();
+		listeners.add(onTick);
+
+		if (animationFrameRequest === undefined) {
+			animationFrameRequest = requestAnimationFrame(tick);
+		}
 
 		return () => {
-			if (animationFrameRequest !== undefined) {
-				cancelAnimationFrame(animationFrameRequest);
-			}
+			listeners.delete(onTick);
 		};
 	});
 }
