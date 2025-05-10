@@ -86,8 +86,6 @@
 	{/snippet}
 
 	{#snippet portal(state)}
-		<div aria-hidden="true" role="tooltip" id={tooltipId} class:visible={isHovered || isFocused}>
-			{@render tooltip({ ...tooltipState, tetherState: state })}
-		</div>
+		{@render tooltip({ ...tooltipState, tetherState: state })}
 	{/snippet}
 </Tether>

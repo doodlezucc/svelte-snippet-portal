@@ -8,12 +8,10 @@
 		title: Snippet;
 	}
 
-	let { alignment = 'top-center', title, children }: Props = $props();
-
-	let wrappedElement = $state<HTMLElement>();
+	let { alignment = 'top-center', children, title }: Props = $props();
 </script>
 
-<BaseTetherTooltip origin={alignment} bind:wrappedElement>
+<BaseTetherTooltip origin={alignment}>
 	{@render children()}
 
 	{#snippet tooltip({ tooltipId, isHovered, isFocused })}

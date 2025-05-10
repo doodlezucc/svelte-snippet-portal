@@ -21,7 +21,7 @@
 	<Tooltip>
 		<b>Hover me to be greeted.</b>
 
-		{#snippet tooltip()}
+		{#snippet title()}
 			Hello!
 		{/snippet}
 	</Tooltip>
@@ -32,7 +32,7 @@
 <Tooltip>
 	<b>Hover me to be greeted.</b>
 
-	{#snippet tooltip()}
+	{#snippet title()}
 		Hello!
 	{/snippet}
 </Tooltip>
@@ -46,6 +46,11 @@
 </p>
 
 <h2>Source Code for <code>{'Tooltip'}</code></h2>
+
+<p>
+	The library provides an <b>element-less</b> Svelte component to base your custom tooltips on,
+	called <code>BaseTetherTooltip</code>. It's used in this recipe's source code.
+</p>
 
 <CodeBlock>
 	{`./Tooltip.svelte`}
@@ -65,25 +70,17 @@
 
 	<li>
 		<p>
-			The element the tooltip should get attached to gets <b>inferred</b> from the rendered
-			<code>children()</code> snippet. The Tether component provides
-			<code>bind:wrappedElement</code> as a way to get access to that element.
+			In the rendered DOM, the tooltip is <b>completely isolated</b> from the element. To make it
+			easier for screen readers, you <b>should always</b> configure your floating tooltip's ID - use
+			the passed in <code>tooltipId</code> parameter from the #snippet block for that.
 		</p>
 	</li>
 
 	<li>
 		<p>
-			In the rendered DOM, the tooltip is <b>completely isolated</b> from the element. To make it
-			possible to apply CSS styles to the tooltip when the element is hovered, a dynamic stylesheet
-			based on the unique <code>$props.id()</code> gets injected into the DOM for each
-			<code>Tooltip</code> instance.
-		</p>
-
-		<p>
-			The independent connection between the two parts of a tooltip requires a <code>:has()</code>
-			selector in CSS. This selector is
-			<a href="https://caniuse.com/css-has">available in modern browsers</a> since late 2023. You may
-			have to opt for a JavaScript solution if you need to support older browsers.
+			Other parameters passed in through the snippet include
+			<code>isHovered</code> and <code>isFocused</code>. Both can be used to determine the visiblity
+			of your tooltip. In the example above, these are used to toggle a CSS class on the element.
 		</p>
 	</li>
 </ol>
