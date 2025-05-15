@@ -126,21 +126,16 @@
 	function findValidElement(parent: HTMLElement) {
 		const children = parent.children;
 
-		if (children.length < 1) {
+		if (children.length !== 1) {
 			wrappedElement = undefined;
 			throw new Error('Tether must have exactly one child element');
 		}
 
 		const child = children[0] as HTMLElement;
-		if (child.clientWidth > 0 || child.clientHeight > 0) {
-			return child;
-		}
-
-		if (child.childElementCount === 0) {
-			// Child may have "display: contents", but no child elements can be used.
-			return child;
-		} else {
+		if (child.hasAttribute('data-tether')) {
 			return findValidElement(child);
+		} else {
+			return child;
 		}
 	}
 
@@ -176,7 +171,7 @@
 	});
 </script>
 
-<div class="tether" bind:this={referenceWrapper}>
+<div data-tether bind:this={referenceWrapper}>
 	{@render children(tetherState)}
 </div>
 
@@ -196,7 +191,7 @@
 {/if}
 
 <style>
-	.tether {
+	:global([data-tether]) {
 		display: contents;
 	}
 
