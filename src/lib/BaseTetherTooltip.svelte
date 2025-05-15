@@ -33,11 +33,11 @@
 	let isHovered = $state(false);
 	let isFocused = $state(false);
 
-	function onMouseEnter() {
+	function onPointerEnter() {
 		isHovered = true;
 	}
 
-	function onMouseLeave() {
+	function onPointerLeave() {
 		isHovered = false;
 	}
 
@@ -58,15 +58,15 @@
 
 		if (currentWrappedElement) {
 			currentWrappedElement.setAttribute('aria-labelledby', tooltipId);
-			currentWrappedElement.addEventListener('mouseenter', onMouseEnter);
-			currentWrappedElement.addEventListener('mouseleave', onMouseLeave);
+			currentWrappedElement.addEventListener('pointerenter', onPointerEnter);
+			currentWrappedElement.addEventListener('pointerleave', onPointerLeave);
 			currentWrappedElement.addEventListener('focus', onFocus);
 			currentWrappedElement.addEventListener('blur', onBlur);
 
 			return () => {
 				currentWrappedElement.removeAttribute('aria-labelledby');
-				currentWrappedElement.removeEventListener('mouseenter', onMouseEnter);
-				currentWrappedElement.removeEventListener('mouseleave', onMouseLeave);
+				currentWrappedElement.removeEventListener('pointerenter', onPointerEnter);
+				currentWrappedElement.removeEventListener('pointerleave', onPointerLeave);
 				currentWrappedElement.removeEventListener('focus', onFocus);
 				currentWrappedElement.removeEventListener('blur', onBlur);
 			};
