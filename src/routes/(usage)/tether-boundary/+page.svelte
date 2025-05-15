@@ -110,10 +110,11 @@
 
 	.outer-boundary {
 		outline: 1px solid scheme.color('text');
-		padding: 100px;
+		padding: calc(3vw + 40px);
 		display: grid;
 		place-content: stretch;
 		position: relative;
+		touch-action: pan-y;
 
 		:global(*) {
 			pointer-events: none;
